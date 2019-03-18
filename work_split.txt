@@ -1,0 +1,14 @@
+The PDF lists all the views and scenes that will be implemented
+
+Anand Raju - Responsible for:
+
+- Login
+- AlbumListView
+- AdminView
+
+Sammy Berger - Responsible for:
+
+Responsible for
+
+- AlbumDetailView
+- SearchView
