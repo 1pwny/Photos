@@ -14,9 +14,9 @@ public class Photos extends Application {
 		try {
 			
 			FXMLLoader loader = new FXMLLoader();
-			loader.setLocation(getClass().getResource("/view/AdminView.fxml"));
+			loader.setLocation(getClass().getResource("/view/Login.fxml"));
 			
-			SplitPane root = (SplitPane)loader.load();
+			Pane root = (Pane)loader.load();
 			Scene scene = new Scene(root);
 			//scene.getStylesheets().add(getClass().getResource("application.css").toExternalForm());
 			primaryStage.setScene(scene);
