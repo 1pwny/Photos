@@ -12,16 +12,15 @@
 
 package Backend;
 
-import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Date;
 
+<<<<<<< HEAD
 public class Album implements Serializable {
+=======
+public class Album {
+>>>>>>> f02a9b3c1edd93a5faad601d8f0ad9527342e2fb
 
-	/**
-	 *
-	 */
-	private static final long serialVersionUID = 1L;
 
 	private ArrayList<Photo> photos;
 

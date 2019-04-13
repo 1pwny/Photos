@@ -13,14 +13,12 @@
 package Backend;
 
 import java.io.File;
-import java.io.Serializable;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Date;
 
-public class Photo implements Serializable {
+public class Photo {
 
-	private static final long serialVersionUID = 1L;
 	private String path;
 	private String caption;
 	private ArrayList<Tag> tags;
