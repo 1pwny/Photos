@@ -1,3 +1,15 @@
+/**
+ * @author Anand Raju
+ * @author Sammy Berger
+ *
+ * <h1>Album</h1>
+ *
+ *
+ * An object that stores multiple photos, along with a little bit of extra information: such as the
+ * earliest and latest that a photo was edited.
+ *
+ * */
+
 package Backend;
 
 import java.io.Serializable;
@@ -57,6 +69,10 @@ public class Album implements Serializable{
 			return;
 		}
 
+		for(Photo p: photos) {
+			p.reDate();
+		}
+		
 		Date te = photos.get(0).date(), tl = photos.get(0).date();
 
 		for(Photo p: photos) {
@@ -66,6 +82,7 @@ public class Album implements Serializable{
 				tl = p.date();
 			}
 		}
+
 	public void printAlbum() {
 
 		for (Photo p: photos) {
