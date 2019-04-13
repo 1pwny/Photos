@@ -6,6 +6,7 @@ import javafx.scene.control.TextField;
 
 
 public class AdminController {
+	
 	@FXML TextField user;
 	@FXML ListView<Integer> user_list;
 	@FXML Button add;

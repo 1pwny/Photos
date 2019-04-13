@@ -85,6 +85,11 @@ public class Album {
 		return photos.contains(new Photo(s));
 	}
 	
+	public ArrayList<Photo> getPhotos(){
+		
+		return photos;
+	}
+	
 	public void printAlbum() {
 
 		for (Photo p: photos) {
