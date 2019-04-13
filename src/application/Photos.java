@@ -14,7 +14,7 @@ public class Photos extends Application {
 		try {
 			
 			FXMLLoader loader = new FXMLLoader();
-			loader.setLocation(getClass().getResource("/view/Login.fxml"));
+			loader.setLocation(getClass().getResource("/view/AlbumDetailView.fxml"));
 			
 			Pane root = (Pane)loader.load();
 			Scene scene = new Scene(root);
