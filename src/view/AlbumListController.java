@@ -1,10 +1,9 @@
 package view;
 
-import javafx.event.*;
-import javafx.fxml.*;
+import javafx.fxml.FXML;
 import javafx.scene.control.Button;
-import com.gluonhq.charm.glisten.control.TextField;
 import javafx.scene.control.ListView;
+import com.gluonhq.charm.glisten.control.TextField; 
 
 
 public class AlbumListController {
