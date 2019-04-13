@@ -18,14 +18,25 @@ public class LoginController {
 	@FXML TextField login_field;
 	@FXML Button submit;
 	
-	public void gotoAdmin(ActionEvent e) throws IOException {
+	public void gotoUser(ActionEvent e) throws IOException {
 		
-		Parent adminviewParent = FXMLLoader.load(getClass().getResource("AdminView.fxml"));
-		Scene adminScene = new Scene(adminviewParent);
+		String user = login_field.getText();
+		String fxml;
+		
+		if(user.toLowerCase().equals("admin")) {
+			fxml = "AdminView.fxml";
+		}
+		
+		else {
+			fxml = "AlbumListView.fxml";
+		}
+		
+		Parent viewParent = FXMLLoader.load(getClass().getResource(fxml));
+		Scene viewScene = new Scene(viewParent);
 		
 		Stage window = (Stage)((Node)e.getSource()).getScene().getWindow();
 		
-		window.setScene(adminScene);
+		window.setScene(viewScene);
 		window.show();
 	}
 }
