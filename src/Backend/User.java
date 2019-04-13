@@ -1,3 +1,15 @@
+/**
+ * @author Anand Raju
+ * @author Sammy Berger
+ *
+ * <h1>User</h1>
+ *
+ *
+ * An object that stores a Photo and various information about it.
+ *
+ *
+ * */
+
 package Backend;
 
 import java.io.Serializable;
