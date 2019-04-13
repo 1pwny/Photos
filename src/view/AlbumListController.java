@@ -52,39 +52,42 @@ public class AlbumListController {
 		Optional<String> result = dialog.showAndWait();
 		 
 		result.ifPresent(name -> {
-		    addAlbum(name);
+			if(listview.getItems().contains(name))
+				return;
+			
+			Album newAl = new Album(name);
+			user.addAlbum(newAl);
+			
+			updateList();
 		});
 	}
-	
+	public void delAlbum() {
+		int index = listview.getSelectionModel().getSelectedIndex();
+		
+		user.removeAlbum(index);
+		
+		updateList();
+	}
+	public void renAlbum() {
+		int index = listview.getSelectionModel().getSelectedIndex();
+		
+		if(index < 0)
+			return;
+		
+		TextInputDialog dialog = new TextInputDialog("enter new name here");
+		 
+		dialog.setTitle("Photos");
+		dialog.setHeaderText("You are renaming the album \"" + listview.getItems().get(index) + "\":");
+		dialog.setContentText("New name:");
+		 
+		Optional<String> result = dialog.showAndWait();
+		 
+		result.ifPresent(newname -> {
+		    listview.getItems().get(index).name = newname;
+		    updateList();
+		});
+	}
 	//--------------------
-	
-	public void addAlbum(Album a) {
-		if(listview.getItems().contains(a))
-			return;
-		
-		user.addAlbum(a);
-		
-		updateList();
-	}
-	public void addAlbum(String name) {
-		if(listview.getItems().contains(name))
-			return;
-		
-		Album newAl = new Album(name);
-		user.addAlbum(newAl);
-		
-		updateList();
-	}
-	public boolean removeAlbum(String name) {
-		boolean deleted = user.removeAlbum(name);
-		
-		updateList();
-		
-		return deleted;
-	}
-	public boolean removeAlbum(Album a) {
-		return user.removeAlbum(a);
-	}
 	
 	public boolean copyTo(Photo p, Album a, Album b) {
 		if(!(a.contains(p)) || b.contains(p))

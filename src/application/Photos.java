@@ -14,13 +14,13 @@ public class Photos extends Application {
 		try {
 			
 			FXMLLoader loader = new FXMLLoader();
-			loader.setLocation(getClass().getResource("/view/AlbumDetailView.fxml"));
+			loader.setLocation(getClass().getResource("/view/Login.fxml"));
 			
 			Pane root = (Pane)loader.load();
 			Scene scene = new Scene(root);
 			//scene.getStylesheets().add(getClass().getResource("application.css").toExternalForm());
 			primaryStage.setScene(scene);
-			primaryStage.setTitle("Admin");
+			primaryStage.setTitle("Photos");
 			primaryStage.setResizable(false);
 			
 			primaryStage.show();

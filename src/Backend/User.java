@@ -47,7 +47,13 @@ public class User implements Serializable{
 	public boolean removeAlbum(String s) {
 		return albums.remove(new Album(s));
 	}
-
+	public Album removeAlbum(int index) {
+		if(index < 0 || index >= albums.size())
+			return null;
+		
+		return albums.remove(index);
+	}
+	
 	public ArrayList<Album> getAlbums() {
 		return albums;
 	}
