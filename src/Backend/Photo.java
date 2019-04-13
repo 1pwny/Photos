@@ -57,6 +57,16 @@ public class Photo {
 		return tags.remove(new Tag(s));
 	}
 
+	public void tag(Tag t) {
+		if(!tags.contains(t))
+			tags.add(t);
+	}
+	public void tag(String s) {
+		Tag t = new Tag(s);
+		if(!tags.contains(t))
+			tags.add(t);
+	}
+	
 	/**
 	 * @param s: A new caption
 	 * @return 

@@ -16,7 +16,7 @@ import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Date;
 
-public class Album implements Serializable {
+public class Album {
 
 
 	private ArrayList<Photo> photos;
@@ -78,11 +78,26 @@ public class Album implements Serializable {
 			}
 		}
 
+	public boolean contains(Photo p) {
+		return photos.contains(p);
+	}
+	public boolean contains(String s) {
+		return photos.contains(new Photo(s));
+	}
+	
 	public void printAlbum() {
 
 		for (Photo p: photos) {
 			System.out.println(p);
 		}
+	}
+
+	public Photo getFromPath(String s) {
+		for(Photo p: photos)
+			if(p.equals(s))
+				return p;
+		
+		return null;
 	}
 	
 	public boolean equals(Object o) {

@@ -36,6 +36,17 @@ public class User implements Serializable{
 		if(!albums.contains(a))
 			albums.add(a);
 	}
+	public void addAlbum(String s) {
+		Album temp = new Album(s);
+		if(!albums.contains(s))
+			albums.add(temp);
+	}
+	public boolean removeAlbum(Album a) {
+		return albums.remove(a);
+	}
+	public boolean removeAlbum(String s) {
+		return albums.remove(new Album(s));
+	}
 
 	public ArrayList<Album> getAlbums() {
 		return albums;
