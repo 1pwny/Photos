@@ -18,7 +18,7 @@
             <TextField fx:id="search" layoutX="14.0" layoutY="19.0" prefHeight="32.0" prefWidth="230.0" promptText="Search" />
             <VBox layoutX="24.0" layoutY="86.0" minHeight="-Infinity" minWidth="-Infinity" prefHeight="249.0" prefWidth="210.0" spacing="20.0">
                <children>
-                  <Button fx:id="create" contentDisplay="CENTER" mnemonicParsing="false" prefHeight="32.0" prefWidth="211.0" text="Create Album" />
+                  <Button fx:id="create" contentDisplay="CENTER" mnemonicParsing="false" onAction = "#makeAlbum" prefHeight="32.0" prefWidth="211.0" text="Create Album" />
                   <Button fx:id="delete" contentDisplay="CENTER" mnemonicParsing="false" prefHeight="32.0" prefWidth="211.0" text="Delete Album" />
                   <Button fx:id="rename" contentDisplay="CENTER" mnemonicParsing="false" prefHeight="32.0" prefWidth="211.0" text="Rename Album" />
                   <Button fx:id="open" contentDisplay="CENTER" mnemonicParsing="false" prefHeight="32.0" prefWidth="211.0" text="Open" />
