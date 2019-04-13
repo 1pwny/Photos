@@ -12,14 +12,13 @@
 
 package Backend;
 
-import java.io.Serializable;
 
-public class Tag implements Serializable{
+public class Tag {
 
 	/**
 	 * 
 	 */
-	private static final long serialVersionUID = 1L;
+
 	private String t;
 	
 	public Tag(String s) {

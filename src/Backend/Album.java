@@ -12,16 +12,11 @@
 
 package Backend;
 
-import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Date;
 
-public class Album implements Serializable{
+public class Album {
 
-	/**
-	 *
-	 */
-	private static final long serialVersionUID = 1L;
 
 	private ArrayList<Photo> photos;
 
