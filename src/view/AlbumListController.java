@@ -1,11 +1,15 @@
 package view;
 
+import java.net.URL;
+import java.util.ResourceBundle;
+
 import Backend.Album;
 import Backend.Photo;
 import Backend.User;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
+import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
 import javafx.scene.control.ListView;
 import javafx.scene.control.TextField;
@@ -25,21 +29,17 @@ public class AlbumListController {
 	private User user;
 	private ObservableList<Album> obsList;
 	
+	
+	public void initData(User u) {
+		user = u;
+	}
+	
 	public void start() {
 		// create list of items
 		// form arraylist
-		user = new User("Test");
 		
-		Album album1 = new Album("Album1");
-		Album album2 = new Album("Album2");
-		Album album3 = new Album("Album3");
-		Album album4 = new Album("Album4");
-		
-		addAlbum(album1);
-		addAlbum(album2);
-		addAlbum(album3);
-		addAlbum(album4);
-
+		obsList = FXCollections.observableArrayList(user.getAlbums());
+		listview.setItems(obsList);
 	}
 	
 	public void addAlbum(Album a) {
@@ -93,5 +93,7 @@ public class AlbumListController {
 		obsList = FXCollections.observableArrayList(user.getAlbums());
 		listview.setItems(obsList);
 	}
+	
+	
 	
 }
