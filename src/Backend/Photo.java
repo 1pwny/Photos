@@ -1,9 +1,18 @@
- 
+ /**
+ * @author Anand Raju
+ * @author Sammy Berger
+ * 
+ * <h1>Bishop</h1>
+ * 
+ *
+ * An object that stores a Photo and various information about it.
+ *
+ * 
+ * */
 
 package Backend;
 
 import java.io.File;
-import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Date;
 
@@ -26,7 +35,6 @@ public class Photo {
 	public boolean removeTag(String s) {
 		return false;
 	}
-	
 	public boolean recaption(String s) {
 		if(s == null) {
 			return false;
@@ -35,11 +43,18 @@ public class Photo {
 		caption = s;
 		return true;
 	}
-	
-	
-	public static void main(String[] args) {
-		// TODO Auto-generated method stub
-
+	public Date date() {
+		return date;
 	}
 
+	public boolean equals(Object o) {
+		if(o instanceof String)
+			return path.equals((String)o);
+		
+		if(o instanceof Photo) {
+			return path.equals(((Photo)o).path);
+		}
+		
+		return false;
+	}
 }
