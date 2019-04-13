@@ -27,7 +27,7 @@ public class AlbumDetailController {
 	
 	@FXML Text date_text;
 	
-	@FXML ListView<Photo> thumbnails;
+	@FXML ListView<Photo> thumbnail_view;
 	
 	@FXML Button add;
 	@FXML Button remove;
@@ -37,6 +37,13 @@ public class AlbumDetailController {
 	private Album album;
 	private ObservableList<Photo> obsList;
 	
+	
+	public void initData(Album selected) {
+		// TODO Auto-generated method stub
+		album = selected;
+		
+	}
+	
 	public void start() {
 		
 		for(int i = 0; i < 5; i++) {
@@ -45,8 +52,23 @@ public class AlbumDetailController {
 			Boolean b = album.addPhoto(new Photo(path));
 		}
 		
-		obsList = FXCollections.observableArrayList(album.getPhotos());
-		thumbnails.setItems(obsList);
+		
+		if(album.getPhotos() != null) {
+			
+			obsList = FXCollections.observableArrayList(album.getPhotos());
+			
+			if(obsList != null) 
+				thumbnail_view.setItems(obsList);
+			
+			else {
+				System.out.print("Error! obslist is null!");
+			}
+		}
+			
+		
+		else {
+			System.out.print("Error! Photos is null!");
+		}
 		
 	}
 

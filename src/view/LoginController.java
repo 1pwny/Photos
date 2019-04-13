@@ -65,7 +65,6 @@ public class LoginController<ListController> {
 			listController.start(window);
 			
 			
-			
 			window.setScene(viewScene);
 			window.show();
 		}

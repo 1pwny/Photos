@@ -86,7 +86,6 @@ public class Album {
 	}
 	
 	public ArrayList<Photo> getPhotos(){
-		
 		return photos;
 	}
 	
