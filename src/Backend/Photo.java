@@ -2,16 +2,21 @@
 
 package Backend;
 
+import java.io.File;
+import java.time.LocalDate;
 import java.util.ArrayList;
+import java.util.Date;
 
 public class Photo {
 
 	private String path;
 	private String caption;
 	private ArrayList<Tag> tags;
+	private Date date;
 	
 	public Photo(String p) {
 		path = p;
+		date = new Date((new File(p)).lastModified());
 		tags = new ArrayList<Tag>();
 	}
 	
