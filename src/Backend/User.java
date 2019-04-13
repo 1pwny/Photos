@@ -36,6 +36,13 @@ public class User implements Serializable{
 			albums.add(a);
 	}
 	
+	public boolean removeAlbum(Album a) {
+		return albums.remove(a);
+	}
+	public boolean removeAlbum(String s) {
+		return albums.remove(new Album(s));
+	}
+	
 	public ArrayList<Album> getAlbums() {
 		return albums;
 	}

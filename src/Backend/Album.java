@@ -16,7 +16,7 @@ import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Date;
 
-public class Album implements Serializable{
+public class Album implements Serializable {
 
 	/**
 	 *
@@ -32,7 +32,6 @@ public class Album implements Serializable{
 		photos = new ArrayList<Photo>();
 		name = "";
 	}
-
 	public Album(String n) {
 		photos = new ArrayList<Photo>();
 		name = n;
@@ -88,6 +87,18 @@ public class Album implements Serializable{
 		for (Photo p: photos) {
 			System.out.println(p);
 		}
+	}
+	
+	public boolean equals(Object o) {
+		if(o instanceof String) {
+			return name.equals((String)o);
+		}
+		
+		if(o instanceof Album) {
+			return name.equals(((Album)o).name);
+		}
+		
+		return false;
 	}
 	
 	public String toString() {

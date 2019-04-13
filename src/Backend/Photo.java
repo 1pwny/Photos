@@ -56,7 +56,7 @@ public class Photo implements Serializable {
 	 * Will attempt to remove a Tag with the same value as this String.
 	 */
 	public boolean removeTag(String s) {
-		return tags.remove(s);
+		return tags.remove(new Tag(s));
 	}
 
 	/**

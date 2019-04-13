@@ -37,17 +37,44 @@ public class AlbumListController {
 		Album album3 = new Album("Album3");
 		Album album4 = new Album("Album4");
 		
-		user.addAlbum(album1);
-		user.addAlbum(album2);
-		user.addAlbum(album3);
-		user.addAlbum(album4);
-		
-		obsList = FXCollections.observableArrayList(user.getAlbums());
-		listview.setItems(obsList);
-
+		addAlbum(album1);
+		addAlbum(album2);
+		addAlbum(album3);
+		addAlbum(album4);
 
 	}
-
-
+	
+	public void addAlbum(Album a) {
+		if(listview.getItems().contains(a))
+			return;
+		
+		user.addAlbum(a);
+		
+		updateList();
+	}
+	public void addAlbum(String name) {
+		if(listview.getItems().contains(name))
+			return;
+		
+		Album newAl = new Album(name);
+		user.addAlbum(newAl);
+		
+		updateList();
+	}
+	public boolean removeAlbum(String name) {
+		boolean deleted = user.removeAlbum(name);
+		
+		updateList();
+		
+		return deleted;
+	}
+	public boolean removeAlbum(Album a) {
+		return user.removeAlbum(a);
+	}
+	
+	public void updateList() {
+		obsList = FXCollections.observableArrayList(user.getAlbums());
+		listview.setItems(obsList);
+	}
 	
 }
