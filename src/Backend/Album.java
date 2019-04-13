@@ -72,4 +72,8 @@ public class Album implements Serializable{
 			System.out.println(p);
 		}
 	}
+	
+	public String toString() {
+		return name;
+	}
 }
