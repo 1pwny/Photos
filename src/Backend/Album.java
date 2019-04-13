@@ -1,23 +1,36 @@
 package Backend;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Date;
 
-public class Album {
+public class Album implements Serializable{
+
+	/**
+	 *
+	 */
+	private static final long serialVersionUID = 1L;
 
 	private ArrayList<Photo> photos;
-	
+
 	public Date earliest, latest;
-	
+	public String name;
+
 	public Album() {
 		photos = new ArrayList<Photo>();
+		name = "";
 	}
-	
+
+	public Album(String n) {
+		photos = new ArrayList<Photo>();
+		name = n;
+	}
+
 	public boolean addPhoto(Photo p) {
 		if(photos.contains(p)) {
 			return false;
 		}
-		
+
 		photos.add(p);
 		if(earliest == null || p.date().before(earliest)) {
 			earliest = p.date();
@@ -25,16 +38,16 @@ public class Album {
 		if(latest == null || p.date().after(latest)) {
 			latest = p.date();
 		}
-		
+
 		return true;
 	}
 
 	public Photo removePhoto(Photo p) {
 		photos.remove(p);
-		
+
 		if(p.date().equals(earliest) || p.date().equals(latest))
 			recalcDates();
-		
+
 		return p;
 	}
 	public void recalcDates() {
@@ -43,14 +56,20 @@ public class Album {
 			latest = null;
 			return;
 		}
-		
+
 		Date te = photos.get(0).date(), tl = photos.get(0).date();
-		
+
 		for(Photo p: photos) {
 			if(p.date().before(te))
 				te = p.date();
 			if(p.date().after(tl))
 				tl = p.date();
+			}
+		}
+	public void printAlbum() {
+
+		for (Photo p: photos) {
+			System.out.println(p);
 		}
 	}
 }
