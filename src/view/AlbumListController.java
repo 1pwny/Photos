@@ -12,6 +12,7 @@ import javafx.scene.control.Button;
 import javafx.scene.control.ListView;
 import javafx.scene.control.TextField;
 import javafx.scene.control.TextInputDialog;
+import javafx.stage.Stage;
 
 
 public class AlbumListController {
@@ -33,9 +34,11 @@ public class AlbumListController {
 		user = u;
 	}
 	
-	public void start() {
+	public void start(Stage primaryStage) {
 		// create list of items
 		// form arraylist
+		
+		primaryStage.setTitle(user.username);
 		
 		obsList = FXCollections.observableArrayList(user.getAlbums());
 		listview.setItems(obsList);

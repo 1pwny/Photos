@@ -62,7 +62,7 @@ public class LoginController<ListController> {
 			test_user.addAlbum(album4);
 			
 			listController.initData(test_user);
-			listController.start();
+			listController.start(window);
 			
 			
 			
