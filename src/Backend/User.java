@@ -26,5 +26,9 @@ public class User implements Serializable{
 	
 	public String username;
 	private ArrayList<Album> albums;
+	
+	public User(String name) {
+		albums = new ArrayList<Album>();
+	}
 
 }
