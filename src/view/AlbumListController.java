@@ -7,7 +7,7 @@ import javafx.scene.control.Button;
 import javafx.scene.control.ListView;
 import javafx.stage.Stage;
 
-import com.gluonhq.charm.glisten.control.TextField;
+import javafx.scene.control.TextField;
 
 import Backend.User;
 import Backend.Album;
@@ -15,7 +15,7 @@ import Backend.Album;
 
 public class AlbumListController {
 
-	@FXML ListView<Integer> listview;
+	@FXML ListView<Album> listview;
 	
 	@FXML Button create;
 	@FXML Button delete;
@@ -27,20 +27,27 @@ public class AlbumListController {
 	private User user;
 	private ObservableList<Album> obsList;
 	
-	public void start(Stage mainStage) {
+	public void start() {
 		// create list of items
 		// form arraylist
-		user = new User()
-
-		listView.setItems(obsList);
-		disableButtons();
-
-		//setting the listener for those items
-		listView.getSelectionModel().selectedIndexProperty().addListener((obs, oldVal, newVal) -> selectedSong(mainStage));
+		user = new User("Test");
 		
-		if(obsList.size() > 0)
-			listView.getSelectionModel().select(0);
+		Album album1 = new Album("Album1");
+		Album album2 = new Album("Album2");
+		Album album3 = new Album("Album3");
+		Album album4 = new Album("Album4");
+		
+		user.addAlbum(album1);
+		user.addAlbum(album2);
+		user.addAlbum(album3);
+		user.addAlbum(album4);
+		
+		obsList = FXCollections.observableArrayList(user.getAlbums());
+		listview.setItems(obsList);
+
+
 	}
+
 
 	
 }

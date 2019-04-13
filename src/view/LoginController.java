@@ -11,9 +11,9 @@ import javafx.stage.Stage;
 
 import java.io.IOException;
 
-import com.gluonhq.charm.glisten.control.TextField; 
+import javafx.scene.control.TextField; 
 
-public class LoginController {
+public class LoginController<ListController> {
 
 	@FXML TextField login_field;
 	@FXML Button submit;
@@ -25,19 +25,35 @@ public class LoginController {
 		
 		if(user.toLowerCase().equals("admin")) {
 			fxml = "AdminView.fxml";
+			Parent viewParent = FXMLLoader.load(getClass().getResource(fxml));
+			Scene viewScene = new Scene(viewParent);
+			
+			Stage window = (Stage)((Node)e.getSource()).getScene().getWindow();
+			
+			window.setScene(viewScene);
+			window.show();
 		}
 		
 		else {
 			fxml = "AlbumListView.fxml";
+			
+			FXMLLoader loader = new FXMLLoader();
+			loader.setLocation(getClass().getResource(fxml));
+			
+			Parent viewParent = loader.load();
+			
+			
+			Scene viewScene = new Scene(viewParent);
+			
+			Stage window = (Stage)((Node)e.getSource()).getScene().getWindow();
+			AlbumListController listController = loader.getController();
+			listController.start();
+			
+			window.setScene(viewScene);
+			window.show();
 		}
 		
-		Parent viewParent = FXMLLoader.load(getClass().getResource(fxml));
-		Scene viewScene = new Scene(viewParent);
 		
-		Stage window = (Stage)((Node)e.getSource()).getScene().getWindow();
-		
-		window.setScene(viewScene);
-		window.show();
 	}
 }
 

@@ -18,5 +18,14 @@ public class User implements Serializable{
 	public User(String name) {
 		albums = new ArrayList<Album>();
 	}
+	
+	public void addAlbum(Album a) {
+		if(!albums.contains(a))
+			albums.add(a);
+	}
+	
+	public ArrayList<Album> getAlbums() {
+		return albums;
+	}
 
 }
