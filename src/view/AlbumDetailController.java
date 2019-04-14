@@ -1,5 +1,10 @@
 package view;
 
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.net.MalformedURLException;
+
 import Backend.Album;
 import Backend.Photo;
 import Backend.User;
@@ -7,9 +12,11 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
+import javafx.scene.control.ListCell;
 import javafx.scene.control.ListView;
 import javafx.stage.Stage;
-
+import javafx.util.Callback;
+import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.text.Text;
 
@@ -44,34 +51,47 @@ public class AlbumDetailController {
 		
 	}
 	
-	public void start() {
-		
-		for(int i = 0; i < 5; i++) {
-			
-			String path = "Path" + i;
-			Boolean b = album.addPhoto(new Photo(path));
-		}
+	public void start() throws FileNotFoundException {
 		
 		
-		if(album.getPhotos() != null) {
+		Boolean b = album.addPhoto(new Photo("file:img_folder/tree.jpg", "pretty tree!", 50, 50));
+		
+		
+		obsList = FXCollections.observableArrayList(album.getPhotos());
+		thumbnail_view.setItems(obsList);
+		
+		thumbnail_view.setCellFactory(new Callback<ListView<Photo>, ListCell<Photo>>() {
 			
-			obsList = FXCollections.observableArrayList(album.getPhotos());
-			
-			if(obsList != null) 
-				thumbnail_view.setItems(obsList);
-			
-			else {
-				System.out.print("Error! obslist is null!");
+			@Override
+			public ListCell<Photo> call(ListView<Photo> param) {
+				// TODO Auto-generated method stub
+				return new ImageCell();
 			}
-		}
+        }
+    );
+		
+		Image image2 = new Image("file:img_folder/tree.jpg");
+		slideshow_view.setImage(image2);
 			
-		
-		else {
-			System.out.print("Error! Photos is null!");
-		}
-		
 	}
+	
+	static class ImageCell extends ListCell<Photo> {
+        @Override
+        public void updateItem(Photo item, boolean empty) {
+            super.updateItem(item, empty);
+            ImageView cellview = new ImageView();
+            if (item != null) {
 
+            	Image img = item.getImage();
+            	cellview.setImage(img);
+                cellview.setFitWidth(50);
+                cellview.setFitHeight(50);
+                cellview.setPreserveRatio(true);
+                setText(item.getCaption());
+                setGraphic(cellview);
+            }
+        }
+    }
 	
 
 }

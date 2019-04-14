@@ -17,9 +17,12 @@ import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Date;
 
+import javafx.scene.image.Image;
+
 public class Photo {
 
 	private String path;
+	private Image image;
 	private String caption;
 	private ArrayList<Tag> tags;
 	private Date date;
@@ -32,10 +35,34 @@ public class Photo {
 	 */
 	public Photo(String p) {
 		path = p;
+		image = new Image(p);
 		date = new Date((new File(p)).lastModified());
 		tags = new ArrayList<Tag>();
 	}
-
+	
+	public Photo(String p, String cap) {
+		path = p;
+		image = new Image(p);
+		date = new Date((new File(p)).lastModified());
+		tags = new ArrayList<Tag>();
+		caption = cap;
+	}
+	
+	public Photo(String p, int l, int w) {
+		path = p;
+		image = new Image(p, l, w, false, false);
+		date = new Date((new File(p)).lastModified());
+		tags = new ArrayList<Tag>();
+	}
+	
+	public Photo(String p, String cap, int l, int w) {
+		path = p;
+		image = new Image(p, l, w, false, false);
+		date = new Date((new File(p)).lastModified());
+		tags = new ArrayList<Tag>();
+		caption = cap;
+	}
+	
 	/**
 	 * @param t: a Tag to remove
 	 * 
@@ -97,6 +124,14 @@ public class Photo {
 
 	public String toString() {
 		return path;
+	}
+	
+	public Image getImage() {
+		return image;
+	}
+	
+	public String getCaption() {
+		return caption;
 	}
 
 	public boolean equals(Object o) {
