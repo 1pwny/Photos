@@ -50,7 +50,7 @@
          <children>
             <VBox prefHeight="200.0" prefWidth="100.0" spacing="5.0" GridPane.rowIndex="1">
                <children>
-                  <Button fx:id="add" mnemonicParsing="false" prefHeight="32.0" prefWidth="129.0" text="Add">
+                  <Button fx:id="add" onAction="#uploadPhoto" mnemonicParsing="false" prefHeight="32.0" prefWidth="129.0" text="Add">
                      <VBox.margin>
                         <Insets left="100.0" top="10.0" />
                      </VBox.margin>
