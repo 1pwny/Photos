@@ -1,6 +1,7 @@
 package view;
 
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.Optional;
 
 import Backend.Album;
@@ -36,6 +37,7 @@ public class AlbumListController {
 	private User user;
 	private ObservableList<Album> obsList;
 	
+	private ArrayList<User> allUsers; //just for keeping a list of all users
 	
 	public void initData(User u) {
 		user = u;
@@ -157,10 +159,16 @@ public class AlbumListController {
 		Stage window = (Stage)((Node)e.getSource()).getScene().getWindow();
 		//LoginController loginController = loader.getController();
 		
+		try {
+			((LoginController<AlbumListController>)loader.getController()).setAllUsers(allUsers);
+		} catch (Exception ex) {}
 		
 		//loginController.start(window);
 		window.setScene(viewScene);
 		window.show();
 	}
 	
+	public void setAllUsers(ArrayList<User> al) {
+		allUsers = al;
+	}
 }

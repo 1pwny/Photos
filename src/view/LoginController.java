@@ -1,31 +1,34 @@
 package view;
 
 
-import javafx.event.*;
-import javafx.fxml.*;
+import java.io.IOException;
+import java.util.ArrayList;
+
+import Backend.Album;
+import Backend.User;
+import javafx.event.ActionEvent;
+import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
-import javafx.stage.Stage;
-
-import java.io.IOException;
-
-import Backend.Album;
-import Backend.User;
-import javafx.scene.control.TextField; 
+import javafx.scene.control.TextField;
+import javafx.stage.Stage; 
 
 public class LoginController<ListController> {
 
 	@FXML TextField login_field;
 	@FXML Button submit;
 	
+	private ArrayList<User> allUsers;
+	
 	public void gotoUser(ActionEvent e) throws IOException {
 		
-		String user = login_field.getText();
+		String name = login_field.getText();
 		String fxml;
 		
-		if(user.toLowerCase().equals("admin")) {
+		if(name.toLowerCase().equals("admin")) {
 			fxml = "AdminView.fxml";
 			Parent viewParent = FXMLLoader.load(getClass().getResource(fxml));
 			Scene viewScene = new Scene(viewParent);
@@ -49,19 +52,27 @@ public class LoginController<ListController> {
 			Stage window = (Stage)((Node)e.getSource()).getScene().getWindow();
 			AlbumListController listController = loader.getController();
 			
-			User test_user = new User(user);
 			
-			Album album1 = new Album("Album1");
-			Album album2 = new Album("Album2");
-			Album album3 = new Album("Album3");
-			Album album4 = new Album("Album4");
+			if(allUsers == null) {
+				allUsers = new ArrayList<User>();
+			}
 			
-			test_user.addAlbum(album1);
-			test_user.addAlbum(album2);
-			test_user.addAlbum(album3);
-			test_user.addAlbum(album4);
+			User user = null;
 			
-			listController.initData(test_user);
+			for(User u: allUsers) {
+				if(u.username.equals(name)) {
+					user = u;
+				}
+			}
+			
+			if(user == null) {
+				user = new User(name);
+				allUsers.add(user);
+			}
+			
+			listController.setAllUsers(allUsers);
+			
+			listController.initData(user);
 			listController.start(window);
 			
 			
@@ -70,6 +81,10 @@ public class LoginController<ListController> {
 		}
 		
 		
+	}
+	
+	public void setAllUsers(ArrayList<User> al) {
+		allUsers = al;
 	}
 }
 
