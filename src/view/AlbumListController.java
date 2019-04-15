@@ -68,7 +68,7 @@ public class AlbumListController {
 		AlbumDetailController detail = loader.getController();
 		
 		detail.initData(selected);
-		detail.start();
+		detail.start(window);
 		window.setScene(viewScene);
 		window.show();
 		

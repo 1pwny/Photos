@@ -3,6 +3,7 @@ package view;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
+import java.io.IOException;
 import java.net.MalformedURLException;
 
 import Backend.Album;
@@ -14,6 +15,7 @@ import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.ListCell;
 import javafx.scene.control.ListView;
+import javafx.stage.FileChooser;
 import javafx.stage.Stage;
 import javafx.util.Callback;
 import javafx.scene.image.Image;
@@ -44,6 +46,8 @@ public class AlbumDetailController {
 	private Album album;
 	private ObservableList<Photo> obsList;
 	
+	Stage stage_var;
+	
 	
 	public void initData(Album selected) {
 		// TODO Auto-generated method stub
@@ -51,10 +55,21 @@ public class AlbumDetailController {
 		
 	}
 	
-	public void start() throws FileNotFoundException {
+	public void start(Stage mainStage) throws FileNotFoundException, IOException {
 		
+		stage_var = mainStage;
 		
-		Boolean b = album.addPhoto(new Photo("file:img_folder/tree.jpg", "pretty tree!", 50, 50));
+		String path = new File(".").getCanonicalPath() + "/stock_folder";
+		File stock_folder = new File(path);
+		File[] files = null;
+		
+		if(stock_folder.isDirectory())
+			files = stock_folder.listFiles();
+		
+		for(File file : files) {
+			String name = file.getName();
+			Boolean b = album.addPhoto(new Photo("file:stock_folder/" + name, name, 50, 50));
+		}
 		
 		
 		obsList = FXCollections.observableArrayList(album.getPhotos());
@@ -92,6 +107,13 @@ public class AlbumDetailController {
             }
         }
     }
+	
+	public void uploadPhoto() {
+		
+		FileChooser fileChooser = new FileChooser();
+		fileChooser.setTitle("Open Resource File");
+		fileChooser.showOpenDialog(stage_var);
+	}
 	
 
 }
