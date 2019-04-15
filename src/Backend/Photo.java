@@ -38,7 +38,11 @@ public class Photo {
 	public Photo(String p) throws FileNotFoundException {
 		path = p;
 		image = new Image(new FileInputStream(p));
-		date = Calendar.getInstance().getTime();
+		
+		Calendar c = Calendar.getInstance();
+		c.set(Calendar.MILLISECOND, 0);
+
+		date = c.getTime();
 		tags = new ArrayList<Tag>();
 	}
 	
@@ -52,7 +56,10 @@ public class Photo {
 	public Photo(String p, String cap) throws FileNotFoundException {
 		path = p;
 		image = new Image(new FileInputStream(p));
-		date = Calendar.getInstance().getTime();
+		Calendar c = Calendar.getInstance();
+		c.set(Calendar.MILLISECOND, 0);
+
+		date = c.getTime();
 		tags = new ArrayList<Tag>();
 		caption = cap;
 	}
@@ -67,7 +74,10 @@ public class Photo {
 	public Photo(String p, int l, int w) {
 		path = p;
 		image = new Image(p, l, w, false, false);
-		date = Calendar.getInstance().getTime();
+		Calendar c = Calendar.getInstance();
+		c.set(Calendar.MILLISECOND, 0);
+
+		date = c.getTime();
 		tags = new ArrayList<Tag>();
 	}
 	
@@ -82,7 +92,10 @@ public class Photo {
 	public Photo(String p, String cap, int l, int w) {
 		path = p;
 		image = new Image(p, l, w, false, false);
-		date = Calendar.getInstance().getTime();
+		Calendar c = Calendar.getInstance();
+		c.set(Calendar.MILLISECOND, 0);
+
+		date = c.getTime();
 		tags = new ArrayList<Tag>();
 		caption = cap;
 	}
