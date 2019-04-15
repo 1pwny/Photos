@@ -3,6 +3,7 @@ package view;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
+import java.io.IOException;
 import java.net.MalformedURLException;
 
 import Backend.Album;
@@ -51,10 +52,20 @@ public class AlbumDetailController {
 		
 	}
 	
-	public void start() throws FileNotFoundException {
+	public void start() throws FileNotFoundException, IOException {
 		
 		
-		Boolean b = album.addPhoto(new Photo("file:img_folder/tree.jpg", "pretty tree!", 50, 50));
+		String path = new File(".").getCanonicalPath() + "/stock_folder";
+		File stock_folder = new File(path);
+		File[] files = null;
+		
+		if(stock_folder.isDirectory())
+			files = stock_folder.listFiles();
+		
+		for(File file : files) {
+			String name = file.getName();
+			Boolean b = album.addPhoto(new Photo("file:stock_folder/" + name, name, 50, 50));
+		}
 		
 		
 		obsList = FXCollections.observableArrayList(album.getPhotos());
