@@ -15,6 +15,7 @@ import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.ListCell;
 import javafx.scene.control.ListView;
+import javafx.stage.FileChooser;
 import javafx.stage.Stage;
 import javafx.util.Callback;
 import javafx.scene.image.Image;
@@ -45,6 +46,8 @@ public class AlbumDetailController {
 	private Album album;
 	private ObservableList<Photo> obsList;
 	
+	Stage stage_var;
+	
 	
 	public void initData(Album selected) {
 		// TODO Auto-generated method stub
@@ -52,8 +55,9 @@ public class AlbumDetailController {
 		
 	}
 	
-	public void start() throws FileNotFoundException, IOException {
+	public void start(Stage mainStage) throws FileNotFoundException, IOException {
 		
+		stage_var = mainStage;
 		
 		String path = new File(".").getCanonicalPath() + "/stock_folder";
 		File stock_folder = new File(path);
@@ -103,6 +107,13 @@ public class AlbumDetailController {
             }
         }
     }
+	
+	public void uploadPhoto() {
+		
+		FileChooser fileChooser = new FileChooser();
+		fileChooser.setTitle("Open Resource File");
+		fileChooser.showOpenDialog(stage_var);
+	}
 	
 
 }
