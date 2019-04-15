@@ -30,9 +30,16 @@ public class LoginController<ListController> {
 		
 		if(name.toLowerCase().equals("admin")) {
 			fxml = "AdminView.fxml";
-			Parent viewParent = FXMLLoader.load(getClass().getResource(fxml));
-			Scene viewScene = new Scene(viewParent);
 			
+			FXMLLoader loader = new FXMLLoader();
+			loader.setLocation(getClass().getResource(fxml));
+			
+			Parent viewParent = loader.load();
+			
+			AdminController admin = loader.getController();
+			admin.initData(allUsers);
+			
+			Scene viewScene = new Scene(viewParent);
 			Stage window = (Stage)((Node)e.getSource()).getScene().getWindow();
 			
 			window.setScene(viewScene);
