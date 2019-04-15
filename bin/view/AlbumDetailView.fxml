@@ -60,12 +60,12 @@
                         <Insets left="100.0" />
                      </VBox.margin>
                   </Button>
-                  <Button fx:id="copy" mnemonicParsing="false" prefHeight="32.0" prefWidth="129.0" text="Copy">
+                  <Button fx:id="copy" onAction="#photo_manuver" mnemonicParsing="false" prefHeight="32.0" prefWidth="129.0" text="Copy">
                      <VBox.margin>
                         <Insets left="100.0" />
                      </VBox.margin>
                   </Button>
-                  <Button fx:id="move" mnemonicParsing="false" prefHeight="32.0" prefWidth="129.0" text="Move">
+                  <Button fx:id="move" onAction="#photo_manuver" mnemonicParsing="false" prefHeight="32.0" prefWidth="129.0" text="Move">
                      <VBox.margin>
                         <Insets left="100.0" />
                      </VBox.margin>

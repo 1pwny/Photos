@@ -1,32 +1,35 @@
 package view;
 
 import java.io.File;
-import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.IOException;
-import java.net.MalformedURLException;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-import java.util.Calendar;
+import java.util.Optional;
 
 import Backend.Album;
 import Backend.Photo;
-import Backend.User;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
+import javafx.scene.control.ChoiceDialog;
 import javafx.scene.control.ListCell;
 import javafx.scene.control.ListView;
 import javafx.stage.FileChooser;
 import javafx.stage.FileChooser.ExtensionFilter;
 import javafx.stage.Stage;
-import javafx.util.Callback;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.text.Text;
-
+/**
+ * @author anand
+ * 
+ * This is the controller responsible for showing the actual Photos in the album. 
+ * 
+ * */
 public class AlbumDetailController {
 	
 	@FXML ImageView slideshow_view;
@@ -57,7 +60,10 @@ public class AlbumDetailController {
 	Stage stage_var;
 	DateFormat df = new SimpleDateFormat("MM/dd/yyyy");
 	
-	
+	/**
+	 * Used for passing the specific albums and album data for the controller to use
+	 * 
+	 * */
 	public void initData(ArrayList<Album> list, Album selected) {
 		// TODO Auto-generated method stub
 		all_albums = list;
@@ -65,6 +71,11 @@ public class AlbumDetailController {
 		
 	}
 	
+	
+	/**
+	 * Upon running, loads all the images from stock folder, then displays thumbnails using a cell factory and a listener. 
+	 * 
+	 * */
 	public void start(Stage mainStage) throws FileNotFoundException, IOException {
 		
 		stage_var = mainStage;
@@ -85,15 +96,7 @@ public class AlbumDetailController {
 		obsList = FXCollections.observableArrayList(album.getPhotos());
 		thumbnail_view.setItems(obsList);
 		
-		thumbnail_view.setCellFactory(new Callback<ListView<Photo>, ListCell<Photo>>() {
-			
-			@Override
-			public ListCell<Photo> call(ListView<Photo> param) {
-				// TODO Auto-generated method stub
-				return new ImageCell();
-			}
-        }
-    );
+		thumbnail_view.setCellFactory(param -> new ImageCell());
 		
 		thumbnail_view.getSelectionModel().selectedIndexProperty().addListener((obs, oldVal, newVal) -> selectedPhoto(mainStage));
 		
@@ -168,6 +171,35 @@ public class AlbumDetailController {
 		obsList = FXCollections.observableArrayList(album.getPhotos());
 		thumbnail_view.setItems(obsList);
 	}
+	
+	public void photo_manuver(ActionEvent e) {
+		
+		Photo selected = obsList.get(thumbnail_view.getSelectionModel().getSelectedIndex());
+		
+		Button command = (Button) e.getSource();
+		String f = (command == move) ? "move" : "copy";
+		
+		ChoiceDialog<Album> dialog = new ChoiceDialog<>(all_albums.get(0), all_albums);
+		dialog.setTitle("Albums");
+		dialog.setHeaderText("Select an Album to " + f + " to..");
+		dialog.setContentText("Album:");
+		
+		Optional<Album> result = dialog.showAndWait();
+		if (result.isPresent()){
+		    
+			if(command == move) {
+				Boolean b = moveTo(selected, album, result.get());
+				updateAlbum();
+			}
+			
+			else if(command == copy) {
+				Boolean b = copyTo(selected, album, result.get());
+			}
+			
+		}
+
+	}
+	
 	
 	public boolean copyTo(Photo p, Album a, Album b) {
 		if(!(a.contains(p)) || b.contains(p))
