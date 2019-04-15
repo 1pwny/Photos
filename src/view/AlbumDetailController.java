@@ -7,6 +7,7 @@ import java.io.IOException;
 import java.net.MalformedURLException;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Calendar;
 
 import Backend.Album;
@@ -47,15 +48,19 @@ public class AlbumDetailController {
 	@FXML Button copy;
 	@FXML Button move;
 	
+	
+	private ArrayList<Album> all_albums;
 	private Album album;
+	
 	private ObservableList<Photo> obsList;
 	
 	Stage stage_var;
 	DateFormat df = new SimpleDateFormat("MM/dd/yyyy");
 	
 	
-	public void initData(Album selected) {
+	public void initData(ArrayList<Album> list, Album selected) {
 		// TODO Auto-generated method stub
+		all_albums = list;
 		album = selected;
 		
 	}

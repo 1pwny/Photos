@@ -67,7 +67,7 @@ public class AlbumListController {
 		Stage window = (Stage)((Node)e.getSource()).getScene().getWindow();
 		AlbumDetailController detail = loader.getController();
 		
-		detail.initData(selected);
+		detail.initData(user.getAlbums(), selected);
 		detail.start(window);
 		window.setScene(viewScene);
 		window.show();
