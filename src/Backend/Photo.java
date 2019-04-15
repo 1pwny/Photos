@@ -1,12 +1,11 @@
  /**
- * @author Anand Raju
+ * <h1>Photo</h1>
+ *
+ *
+ * An object with a Photo, and all the information about that photo you might need: its path, its image, its caption,
+ * the list of tags assigned to it, and the date it was last edited.
+ *
  * @author Sammy Berger
- *
- * <h1>Bishop</h1>
- *
- *
- * An object that stores a Photo and various information about it, such as the date it was last edited, the
- * caption it might have, any tags attached to it, etc.
  *
  * */
 
@@ -29,9 +28,9 @@ public class Photo {
 
 	
 	/**
-	 * @param p: a String representing the path to the photo
-	 * 
 	 * Will automatically use the path provided to determine the date the photo was edited.
+	 * 
+	 * @param p: a String representing the path to the photo
 	 */
 	public Photo(String p) {
 		path = p;
@@ -39,7 +38,12 @@ public class Photo {
 		date = new Date((new File(p)).lastModified());
 		tags = new ArrayList<Tag>();
 	}
-	
+	/**
+	 * Makes a photo and also starts it with a caption
+	 * 
+	 * @param p: a String representing the path to the photo
+	 * @param cap: the photo's caption
+	 */
 	public Photo(String p, String cap) {
 		path = p;
 		image = new Image(p);
@@ -48,6 +52,13 @@ public class Photo {
 		caption = cap;
 	}
 	
+	/**
+	 * Makes a photo and also uses the provided length and width to scale the image
+	 * 
+	 * @param p: a String representing the path to the photo
+	 * @param l: length
+	 * @param w: width
+	 */
 	public Photo(String p, int l, int w) {
 		path = p;
 		image = new Image(p, l, w, false, false);
@@ -55,6 +66,14 @@ public class Photo {
 		tags = new ArrayList<Tag>();
 	}
 	
+	/**
+	 * Does everything from above, but combines it into a single method
+	 * 
+	 * @param p
+	 * @param cap
+	 * @param l
+	 * @param w
+	 */
 	public Photo(String p, String cap, int l, int w) {
 		path = p;
 		image = new Image(p, l, w, false, false);
@@ -64,21 +83,20 @@ public class Photo {
 	}
 	
 	/**
-	 * @param t: a Tag to remove
+	 * Will attempt to remove a given Tag from this photo
 	 * 
+	 * @param t: a Tag to remove
 	 * @return true if the tag existed, false if not
 	 * 
-	 * Will attempt to remove a given Tag from this photo
 	 */
 	public boolean removeTag(Tag t) {
 		return tags.remove(t);
 	}
 	/**
-	 * @param s: a String to remove
-	 * 
-	 * @return true if a tag with the same value exsts, false if not
-	 * 
 	 * Will attempt to remove a Tag with the same value as this String.
+	 * 
+	 * @param s: a String to remove
+	 * @return true if a tag with the same value exsts, false if not
 	 */
 	public boolean removeTag(String s) {
 		return tags.remove(new Tag(s));
