@@ -16,6 +16,7 @@ import javafx.scene.control.Button;
 import javafx.scene.control.ListCell;
 import javafx.scene.control.ListView;
 import javafx.stage.FileChooser;
+import javafx.stage.FileChooser.ExtensionFilter;
 import javafx.stage.Stage;
 import javafx.util.Callback;
 import javafx.scene.image.Image;
@@ -111,8 +112,19 @@ public class AlbumDetailController {
 	public void uploadPhoto() {
 		
 		FileChooser fileChooser = new FileChooser();
-		fileChooser.setTitle("Open Resource File");
+		fileChooser.setTitle("Add Image");
+		fileChooser.getExtensionFilters().addAll(
+				new ExtensionFilter("jpeg files", "*.jpg"),
+				new ExtensionFilter("png files", "*.png"));
 		fileChooser.showOpenDialog(stage_var);
+		
+		File selectedFile = fileChooser.showOpenDialog(stage_var);
+		 if (selectedFile != null) {
+			 
+			 Photo photo = new Photo("file:" + selectedFile.getName(), selectedFile.getName(), 50, 50)
+			 Boolean b = album.addPhoto(photo);
+			 obsList.add(photo);
+		 }
 	}
 	
 
