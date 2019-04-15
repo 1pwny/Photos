@@ -96,7 +96,13 @@ public class AlbumDetailController {
         public void updateItem(Photo item, boolean empty) {
             super.updateItem(item, empty);
             ImageView cellview = new ImageView();
-            if (item != null) {
+            
+            if (empty) {
+                setText(null);
+                setGraphic(null);
+            }
+            
+            else {
 
             	Image img = item.getImage();
             	cellview.setImage(img);
@@ -116,15 +122,22 @@ public class AlbumDetailController {
 		fileChooser.getExtensionFilters().addAll(
 				new ExtensionFilter("jpeg files", "*.jpg"),
 				new ExtensionFilter("png files", "*.png"));
-		fileChooser.showOpenDialog(stage_var);
 		
 		File selectedFile = fileChooser.showOpenDialog(stage_var);
-		 if (selectedFile != null) {
-			 
-			 Photo photo = new Photo("file:" + selectedFile.getName(), selectedFile.getName(), 50, 50)
-			 Boolean b = album.addPhoto(photo);
-			 obsList.add(photo);
+		if (selectedFile != null) {
+			
+			Photo photo = new Photo("file:" + selectedFile.getName(), selectedFile.getName(), 50, 50);
+			Boolean b = album.addPhoto(photo);
+			updateAlbum();
+			//obsList.add(photo);
+			
 		 }
+	}
+	
+	public void updateAlbum() {
+		
+		obsList = FXCollections.observableArrayList(album.getPhotos());
+		thumbnail_view.setItems(obsList);
 	}
 	
 	public boolean copyTo(Photo p, Album a, Album b) {
