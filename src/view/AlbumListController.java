@@ -121,26 +121,7 @@ public class AlbumListController {
 		});
 	}
 	//--------------------
-	
-	public boolean copyTo(Photo p, Album a, Album b) {
-		if(!(a.contains(p)) || b.contains(p))
-			return false;
 		
-		b.addPhoto(p);
-		
-		return true;
-	}
-	
-	public boolean moveTo(Photo p, Album a, Album b) {
-		if(!(a.contains(p)) || b.contains(p))
-			return false;
-		
-		copyTo(p, a, b);
-		a.removePhoto(p);
-		
-		return true;
-	}
-	
 	public void updateList() {
 		obsList = FXCollections.observableArrayList(user.getAlbums());
 		listview.setItems(obsList);

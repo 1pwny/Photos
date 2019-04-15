@@ -1,12 +1,11 @@
 /**
- * @author Anand Raju
- * @author Sammy Berger
- *
  * <h1>User</h1>
  *
  *
  * An object that stores a Photo and various information about it.
  *
+ *
+ *	@author Sammy Berger
  *
  * */
 
@@ -17,9 +16,6 @@ import java.util.ArrayList;
 
 public class User implements Serializable{
 
-	/**
-	 *
-	 */
 	private static final long serialVersionUID = 1L;
 	public static final String storeDir = "dat";
 	public static final String storefile = "album.dat";
@@ -58,4 +54,7 @@ public class User implements Serializable{
 		return albums;
 	}
 
+	public String toString() {
+		return username;
+	}
 }
