@@ -29,6 +29,7 @@ public class AlbumListController {
 	@FXML Button delete;
 	@FXML Button rename;
 	@FXML Button open;
+	@FXML Button logout;
 	
 	@FXML TextField search;
 	
@@ -143,6 +144,23 @@ public class AlbumListController {
 		listview.setItems(obsList);
 	}
 	
-	
+	public void logOut(ActionEvent e) throws IOException {
+		String fxml = "Login.fxml";
+		
+		FXMLLoader loader = new FXMLLoader();
+		loader.setLocation(getClass().getResource(fxml));
+		
+		Parent viewParent = loader.load();
+		
+		
+		Scene viewScene = new Scene(viewParent);
+		Stage window = (Stage)((Node)e.getSource()).getScene().getWindow();
+		//LoginController loginController = loader.getController();
+		
+		
+		//loginController.start(window);
+		window.setScene(viewScene);
+		window.show();
+	}
 	
 }

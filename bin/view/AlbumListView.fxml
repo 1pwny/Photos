@@ -7,7 +7,7 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.VBox?>
 
-<SplitPane dividerPositions="0.5394045534150613" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="431.0" prefWidth="573.0" xmlns="http://javafx.com/javafx" xmlns:fx="http://javafx.com/fxml/1" fx:controller="view.AlbumListController">
+<SplitPane dividerPositions="0.5394045534150613" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="431.0" prefWidth="573.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="view.AlbumListController">
   <items>
     <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="546.0" prefWidth="323.0">
          <children>
@@ -18,12 +18,13 @@
             <TextField fx:id="search" layoutX="14.0" layoutY="19.0" prefHeight="32.0" prefWidth="230.0" promptText="Search" />
             <VBox layoutX="24.0" layoutY="86.0" minHeight="-Infinity" minWidth="-Infinity" prefHeight="249.0" prefWidth="210.0" spacing="20.0">
                <children>
-                  <Button fx:id="create" contentDisplay="CENTER" mnemonicParsing="false" onAction = "#makeAlbum" prefHeight="32.0" prefWidth="211.0" text="Create Album" />
-                  <Button fx:id="delete" contentDisplay="CENTER" mnemonicParsing="false" onAction = "#delAlbum" prefHeight="32.0" prefWidth="211.0" text="Delete Album" />
-                  <Button fx:id="rename" contentDisplay="CENTER" mnemonicParsing="false" onAction = "#renAlbum" prefHeight="32.0" prefWidth="211.0" text="Rename Album" />
-                  <Button fx:id="open" contentDisplay="CENTER" mnemonicParsing="false" onAction = "#gotoDetail" prefHeight="32.0" prefWidth="211.0" text="Open" />
+                  <Button fx:id="create" contentDisplay="CENTER" mnemonicParsing="false" onAction="#makeAlbum" prefHeight="32.0" prefWidth="211.0" text="Create Album" />
+                  <Button fx:id="delete" contentDisplay="CENTER" mnemonicParsing="false" onAction="#delAlbum" prefHeight="32.0" prefWidth="211.0" text="Delete Album" />
+                  <Button fx:id="rename" contentDisplay="CENTER" mnemonicParsing="false" onAction="#renAlbum" prefHeight="32.0" prefWidth="211.0" text="Rename Album" />
+                  <Button fx:id="open" contentDisplay="CENTER" mnemonicParsing="false" onAction="#gotoDetail" prefHeight="32.0" prefWidth="211.0" text="Open" />
                </children>
             </VBox>
+            <Button fx:id="logout" layoutX="182.0" layoutY="390.0" mnemonicParsing="false" onAction="#logOut" text="Log Out" textFill="#f20707" />
          </children></AnchorPane>
   </items>
 </SplitPane>
