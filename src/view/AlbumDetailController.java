@@ -5,6 +5,9 @@ import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.net.MalformedURLException;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
 
 import Backend.Album;
 import Backend.Photo;
@@ -48,6 +51,7 @@ public class AlbumDetailController {
 	private ObservableList<Photo> obsList;
 	
 	Stage stage_var;
+	DateFormat df = new SimpleDateFormat("MM/dd/yyyy");
 	
 	
 	public void initData(Album selected) {
@@ -86,9 +90,29 @@ public class AlbumDetailController {
         }
     );
 		
-		Image image2 = new Image("file:img_folder/tree.jpg");
-		slideshow_view.setImage(image2);
+		thumbnail_view.getSelectionModel().selectedIndexProperty().addListener((obs, oldVal, newVal) -> selectedPhoto(mainStage));
+		
+		if(obsList.size() > 0)
+			thumbnail_view.getSelectionModel().select(0);
 			
+	}
+	
+	
+	private void selectedPhoto(Stage mainStage) {
+
+		try {
+
+			Photo selected = obsList.get(thumbnail_view.getSelectionModel().getSelectedIndex());
+			//enableButtons();
+
+			slideshow_view.setImage(selected.getImage());
+			caption_text.setText(selected.getCaption());
+			date_text.setText(df.format(selected.date()));
+		}
+
+		catch(IndexOutOfBoundsException e){
+		}
+
 	}
 	
 	static class ImageCell extends ListCell<Photo> {

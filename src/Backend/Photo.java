@@ -14,9 +14,9 @@ package Backend;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
-import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.Calendar;
 
 import javafx.scene.image.Image;
 
@@ -38,7 +38,7 @@ public class Photo {
 	public Photo(String p) throws FileNotFoundException {
 		path = p;
 		image = new Image(new FileInputStream(p));
-		date = new Date((new File(p)).lastModified());
+		date = Calendar.getInstance().getTime();
 		tags = new ArrayList<Tag>();
 	}
 	
@@ -52,7 +52,7 @@ public class Photo {
 	public Photo(String p, String cap) throws FileNotFoundException {
 		path = p;
 		image = new Image(new FileInputStream(p));
-		date = new Date((new File(p)).lastModified());
+		date = Calendar.getInstance().getTime();
 		tags = new ArrayList<Tag>();
 		caption = cap;
 	}
@@ -67,7 +67,7 @@ public class Photo {
 	public Photo(String p, int l, int w) {
 		path = p;
 		image = new Image(p, l, w, false, false);
-		date = new Date((new File(p)).lastModified());
+		date = Calendar.getInstance().getTime();
 		tags = new ArrayList<Tag>();
 	}
 	
@@ -82,7 +82,7 @@ public class Photo {
 	public Photo(String p, String cap, int l, int w) {
 		path = p;
 		image = new Image(p, l, w, false, false);
-		date = new Date((new File(p)).lastModified());
+		date = Calendar.getInstance().getTime();
 		tags = new ArrayList<Tag>();
 		caption = cap;
 	}
