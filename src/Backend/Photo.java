@@ -13,6 +13,8 @@
 package Backend;
 
 import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Date;
@@ -32,17 +34,18 @@ public class Photo {
 	 * @param p: a String representing the path to the photo
 	 * 
 	 * Will automatically use the path provided to determine the date the photo was edited.
+	 * @throws FileNotFoundException 
 	 */
-	public Photo(String p) {
+	public Photo(String p) throws FileNotFoundException {
 		path = p;
-		image = new Image(p);
+		image = new Image(new FileInputStream(p));
 		date = new Date((new File(p)).lastModified());
 		tags = new ArrayList<Tag>();
 	}
 	
-	public Photo(String p, String cap) {
+	public Photo(String p, String cap) throws FileNotFoundException {
 		path = p;
-		image = new Image(p);
+		image = new Image(new FileInputStream(p));
 		date = new Date((new File(p)).lastModified());
 		tags = new ArrayList<Tag>();
 		caption = cap;

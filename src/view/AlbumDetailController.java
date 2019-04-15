@@ -126,7 +126,7 @@ public class AlbumDetailController {
 		File selectedFile = fileChooser.showOpenDialog(stage_var);
 		if (selectedFile != null) {
 			
-			Photo photo = new Photo("file:" + selectedFile.getName(), selectedFile.getName(), 50, 50);
+			Photo photo = new Photo(selectedFile.toURI().toString(), selectedFile.getName(), 50, 50);
 			Boolean b = album.addPhoto(photo);
 			updateAlbum();
 			//obsList.add(photo);

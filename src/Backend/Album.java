@@ -12,6 +12,7 @@
 
 package Backend;
 
+import java.io.FileNotFoundException;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Date;
@@ -119,8 +120,9 @@ public class Album {
 	 * 
 	 * @param s: a String containing the photo's path
 	 * @return whether or not the album has the photo
+	 * @throws FileNotFoundException 
 	 */
-	public boolean contains(String s) {
+	public boolean contains(String s) throws FileNotFoundException {
 		return photos.contains(new Photo(s));
 	}
 	
