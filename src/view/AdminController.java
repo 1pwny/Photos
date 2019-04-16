@@ -21,7 +21,15 @@ import javafx.scene.control.Alert.AlertType;
 import javafx.scene.text.Text;
 import javafx.stage.Stage; 
 
-
+/**
+ * 
+ * @author Anand Raju
+ * @author Sammy Berger
+ * 
+ * This controller is responsible for the actual admin view, and is responsible for adding and 
+ * deleting users.
+ * 
+ * */
 public class AdminController {
 	
 	@FXML TextField user;
@@ -37,7 +45,12 @@ public class AdminController {
 	private ObservableList<User> obsList;
 	private Stage stage_var;
 	
-	
+	/**
+	 * @param mainstage
+	 * 
+	 * upon starting, the controller sets an observable list containing users from the UserApp, and 
+	 * 
+	 * */
 	public void start(Stage mainStage) {
 		
 		obsList = FXCollections.observableArrayList(user_list);
@@ -50,6 +63,10 @@ public class AdminController {
 			listview.getSelectionModel().select(0);
 	}
 	
+	/**
+	 * The Listener for selecting a user. Upon selection displays the username.
+	 * 
+	 * */
 	public void selectedUser(Stage mainstage) {
 		
 		try {
@@ -63,6 +80,12 @@ public class AdminController {
 			
 		}
 	}
+	
+	/**
+	 * This function handles the events for adding and deleting a user. Will not add a user with the same username. 
+	 * 
+	 * @param e ActionEvent from either add or delete button
+	 * */
 	
 	public void add_remove_User(ActionEvent e) {
 		
@@ -86,14 +109,12 @@ public class AdminController {
 				else {
 					errorMessage("User already exists!");
 				}
-				
 			}
 
 			else {
 				
 				errorMessage("You have to input a username!");
 			}
-			
 		}
 		
 		else if(command == delete){
@@ -118,6 +139,18 @@ public class AdminController {
 		updateList();
 	}
 	
+	/**
+	 * 
+	 * Handles logging out to the LoginView when the logout button is pressed. 
+	 * 
+	 * First the event writes to the UsersApp and then sends a null app to the Login Controller such that
+	 * the controller will read a fresh list of updated users upon starting
+	 *
+	 * 
+	 * @param e an Action event.
+	 * 
+	 * */
+	
 	public void logOut(ActionEvent e) throws IOException, ClassNotFoundException {
 		
 		app.writeApp();
@@ -139,12 +172,23 @@ public class AdminController {
 		window.setScene(viewScene);
 		window.show();
 	}
-
+	
+	/**
+	 * This method simply refreshes the listview every time the list is updated
+	 * 
+	 * */
 	public void updateList() {
 		obsList = FXCollections.observableArrayList(user_list);
 		listview.setItems(obsList);
 	}
 	
+	/**
+	 * 
+	 * Makes and error message pop up with custom message
+	 * 
+	 * @param message  the message you want to show
+	 * 
+	 * */
 	private void errorMessage(String message) {
 
 		Alert alert = new Alert(AlertType.INFORMATION);
@@ -153,7 +197,17 @@ public class AdminController {
 		alert.setHeaderText(message);
 		alert.showAndWait();
 	}
-
+	
+	
+	/**
+	 * 
+	 * The way we initialize data in the controller when changing scenes. 
+	 * 
+	 * @param ap  a Users app for the controller to write data
+	 * @param allUsers  an array list of all users
+	 * 
+	 * 
+	 * */
 	public void initData(UsersApp ap, ArrayList<User> allUsers) {
 		// TODO Auto-generated method stub
 		app = ap;
