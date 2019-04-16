@@ -77,9 +77,7 @@ public class LoginController<ListController> {
 				allUsers.add(user);
 			}
 			
-			listController.setAllUsers(allUsers);
-			
-			listController.initData(user);
+			listController.initData(allUsers, user);
 			listController.start(window);
 			
 			

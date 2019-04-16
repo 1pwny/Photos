@@ -39,7 +39,8 @@ public class AlbumListController {
 	
 	private ArrayList<User> allUsers; //just for keeping a list of all users
 	
-	public void initData(User u) {
+	public void initData(ArrayList<User> users, User u) {
+		allUsers = users;
 		user = u;
 	}
 	
@@ -67,7 +68,7 @@ public class AlbumListController {
 		Stage window = (Stage)((Node)e.getSource()).getScene().getWindow();
 		AlbumDetailController detail = loader.getController();
 		
-		detail.initData(user.getAlbums(), selected);
+		detail.initData(allUsers, user, selected);
 		detail.start(window);
 		window.setScene(viewScene);
 		window.show();

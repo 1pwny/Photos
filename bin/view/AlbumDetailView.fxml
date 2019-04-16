@@ -16,8 +16,8 @@
 <Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="672.0" prefWidth="886.0" xmlns="http://javafx.com/javafx" xmlns:fx="http://javafx.com/fxml/1" fx:controller="view.AlbumDetailController">
    <children>
       <ImageView fx:id="slideshow_view" fitHeight="339.0" fitWidth="460.0" layoutX="13.0" layoutY="69.0" pickOnBounds="true" preserveRatio="true" />
-      <Button fx:id="slide_left" onAction="#next_prev_Photo" layoutX="14.0" layoutY="453.0" mnemonicParsing="false" prefHeight="29.0" prefWidth="112.0" text="&lt;&lt;" />
-      <Button fx:id="slide_right" onAction="#next_prev_Photo" layoutX="355.0" layoutY="453.0" mnemonicParsing="false" prefHeight="29.0" prefWidth="112.0" text="&gt;&gt;" />
+      <Button fx:id="slide_left" layoutX="14.0" layoutY="453.0" mnemonicParsing="false" onAction="#next_prev_Photo" prefHeight="29.0" prefWidth="112.0" text="&lt;&lt;" />
+      <Button fx:id="slide_right" layoutX="355.0" layoutY="453.0" mnemonicParsing="false" onAction="#next_prev_Photo" prefHeight="29.0" prefWidth="112.0" text="&gt;&gt;" />
       <Text fx:id="caption_text" layoutY="28.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Caption Name [Image Displayed Below]" textAlignment="CENTER" textOrigin="CENTER" wrappingWidth="502.8033790588379">
          <font>
             <Font name="Source Code Pro" size="22.0" />
@@ -25,14 +25,14 @@
       </Text>
       <VBox layoutX="8.0" layoutY="507.0" prefHeight="98.0" prefWidth="460.0" spacing="10.0">
          <children>
-            <Button fx:id="edit_caption" onAction="#editCaption" mnemonicParsing="false" prefHeight="31.0" prefWidth="93.0" text="Edit Caption" textAlignment="CENTER" translateX="5.0">
+            <Button fx:id="edit_caption" mnemonicParsing="false" onAction="#editCaption" prefHeight="31.0" prefWidth="93.0" text="Edit Caption" textAlignment="CENTER" translateX="5.0">
                <VBox.margin>
                   <Insets />
                </VBox.margin>
             </Button>
             <ButtonBar prefHeight="40.0" prefWidth="277.0">
                <buttons>
-                  <Button fx:id="edit_tags" onAction="#gotoTags" mnemonicParsing="false" prefHeight="32.0" prefWidth="95.0" text="Edit Tags" translateX="-15.0" />
+                  <Button fx:id="edit_tags" mnemonicParsing="false" onAction="#gotoTags" prefHeight="32.0" prefWidth="95.0" text="Edit Tags" translateX="-15.0" />
                   <Text fx:id="tags_text" strokeType="OUTSIDE" strokeWidth="0.0" text="[Tags Displayed Here]" textAlignment="CENTER" wrappingWidth="337.316415309906" />
                </buttons>
             </ButtonBar>
@@ -50,22 +50,22 @@
          <children>
             <VBox prefHeight="200.0" prefWidth="100.0" spacing="5.0" GridPane.rowIndex="1">
                <children>
-                  <Button fx:id="add" onAction="#uploadPhoto" mnemonicParsing="false" prefHeight="32.0" prefWidth="129.0" text="Add">
+                  <Button fx:id="add" mnemonicParsing="false" onAction="#uploadPhoto" prefHeight="32.0" prefWidth="129.0" text="Add">
                      <VBox.margin>
                         <Insets left="100.0" top="10.0" />
                      </VBox.margin>
                   </Button>
-                  <Button fx:id="remove" onAction="#removePhoto" mnemonicParsing="false" prefHeight="32.0" prefWidth="129.0" text="Remove">
+                  <Button fx:id="remove" mnemonicParsing="false" onAction="#removePhoto" prefHeight="32.0" prefWidth="129.0" text="Remove">
                      <VBox.margin>
                         <Insets left="100.0" />
                      </VBox.margin>
                   </Button>
-                  <Button fx:id="copy" onAction="#photo_manuver" mnemonicParsing="false" prefHeight="32.0" prefWidth="129.0" text="Copy">
+                  <Button fx:id="copy" mnemonicParsing="false" onAction="#photo_manuver" prefHeight="32.0" prefWidth="129.0" text="Copy">
                      <VBox.margin>
                         <Insets left="100.0" />
                      </VBox.margin>
                   </Button>
-                  <Button fx:id="move" onAction="#photo_manuver" mnemonicParsing="false" prefHeight="32.0" prefWidth="129.0" text="Move">
+                  <Button fx:id="move" mnemonicParsing="false" onAction="#photo_manuver" prefHeight="32.0" prefWidth="129.0" text="Move">
                      <VBox.margin>
                         <Insets left="100.0" />
                      </VBox.margin>
@@ -75,5 +75,6 @@
             <ListView fx:id="thumbnail_view" prefHeight="479.0" prefWidth="337.0" />
          </children>
       </GridPane>
+      <Button onAction="#backtoAlbum" layoutX="13.0" layoutY="624.0" mnemonicParsing="false" prefHeight="32.0" prefWidth="112.0" text="Back to Albums" />
    </children>
 </Pane>

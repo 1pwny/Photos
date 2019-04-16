@@ -11,6 +11,7 @@ import java.util.Optional;
 import Backend.Album;
 import Backend.Photo;
 import Backend.Tag;
+import Backend.User;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -58,9 +59,11 @@ public class AlbumDetailController {
 	@FXML Button copy;
 	@FXML Button move;
 	
-	
+	private ArrayList<User> all_users; 
+	private User user;
 	private ArrayList<Album> all_albums;
 	private Album album;
+	
 	
 	private ObservableList<Photo> obsList;
 	
@@ -71,9 +74,12 @@ public class AlbumDetailController {
 	 * Used for passing the specific albums and album data for the controller to use
 	 * 
 	 * */
-	public void initData(ArrayList<Album> list, Album selected) {
+	public void initData(ArrayList<User> allusers, User u, Album selected) {
 		// TODO Auto-generated method stub
-		all_albums = list;
+		
+		all_users = allusers;
+		user = u;
+		all_albums = u.getAlbums();
 		album = selected;
 		
 	}
@@ -86,6 +92,7 @@ public class AlbumDetailController {
 	public void start(Stage mainStage) throws FileNotFoundException, IOException {
 		
 		stage_var = mainStage;
+		mainStage.setTitle(album.name);
 		
 		String path = new File(".").getCanonicalPath() + "/stock_folder";
 		File stock_folder = new File(path);
@@ -184,6 +191,24 @@ public class AlbumDetailController {
 		window.showAndWait();
 		updatePhoto(selected);
 		
+	}
+	
+	public void backtoAlbum(ActionEvent e) throws IOException {
+		
+		FXMLLoader loader = new FXMLLoader();
+		loader.setLocation(getClass().getResource("AlbumListView.fxml"));
+		
+		Parent viewParent = loader.load();
+		
+		
+		Scene viewScene = new Scene(viewParent);
+		Stage window = (Stage)((Node)e.getSource()).getScene().getWindow();
+		AlbumListController albumlist = loader.getController();
+		
+		albumlist.initData(all_users, user);
+		albumlist.start(window);
+		window.setScene(viewScene);
+		window.show();
 	}
 	
 	public void editCaption() {
