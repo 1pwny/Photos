@@ -4,6 +4,7 @@ import java.util.ArrayList;
 
 import Backend.Tag;
 import Backend.User;
+import Backend.UsersApp;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -31,14 +32,11 @@ public class AdminController {
 	@FXML Button delete;
 	@FXML Button logout;
 	
+	private UsersApp app;
 	private ArrayList<User> user_list;
 	private ObservableList<User> obsList;
 	private Stage stage_var;
 	
-	public void initData(ArrayList<User> users) {
-		
-		user_list = (users != null) ? users : new ArrayList<User>();
-	}
 	
 	public void start(Stage mainStage) {
 		
@@ -120,7 +118,9 @@ public class AdminController {
 		updateList();
 	}
 	
-	public void logOut(ActionEvent e) throws IOException {
+	public void logOut(ActionEvent e) throws IOException, ClassNotFoundException {
+		
+		app.writeApp();
 		
 		FXMLLoader loader = new FXMLLoader();
 		loader.setLocation(getClass().getResource("Login.fxml"));
@@ -132,7 +132,7 @@ public class AdminController {
 		Stage window = (Stage)((Node)e.getSource()).getScene().getWindow();
 		
 		LoginController login = loader.getController();
-		login.setAllUsers(user_list);
+		login.initData(null);
 		login.start(window);
 		
 		//loginController.start(window);
@@ -152,6 +152,13 @@ public class AdminController {
 		alert.setTitle("Error!");
 		alert.setHeaderText(message);
 		alert.showAndWait();
+	}
+
+	public void initData(UsersApp ap, ArrayList<User> allUsers) {
+		// TODO Auto-generated method stub
+		app = ap;
+		user_list = (allUsers != null) ? allUsers : new ArrayList<User>();
+		
 	}
 	
 	

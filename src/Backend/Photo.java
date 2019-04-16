@@ -14,14 +14,16 @@ package Backend;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.Calendar;
 
 import javafx.scene.image.Image;
 
-public class Photo {
+public class Photo implements Serializable {
 
+	private static final long serialVersionUID = 1L;
 	private String path;
 	private Image image;
 	private String caption;

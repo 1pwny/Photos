@@ -1,11 +1,19 @@
 package view;
 
 
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
 import java.io.IOException;
+import java.io.ObjectInputStream;
+import java.io.ObjectOutputStream;
+import java.io.Serializable;
 import java.util.ArrayList;
 
 import Backend.Album;
 import Backend.User;
+import Backend.UsersApp;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -20,14 +28,36 @@ import javafx.stage.Stage;
 
 public class LoginController<ListController> {
 
+
 	@FXML TextField login_field;
 	@FXML Button submit;
 	
-	private ArrayList<User> allUsers;
+	private ArrayList<User> allUsers = new ArrayList<User>();
+	private UsersApp app = null;
+	
 	private Stage stage_var;
 	
-	public void start(Stage mainStage) {
+	public void start(Stage mainStage) throws ClassNotFoundException, IOException {
 		stage_var = mainStage;
+		
+		if(app == null) {
+			
+			try {
+				
+				app = new UsersApp(allUsers);
+				app = app.readApp();
+				System.out.print("Got Something!");
+				
+			}
+			
+			catch(FileNotFoundException e) {
+				System.out.print("No file to be found");
+				app = new UsersApp(allUsers);
+			}	
+		}
+		
+		allUsers = app.getUsers();
+		
 	}
 	
 	public void gotoUser(ActionEvent e) throws IOException {
@@ -48,16 +78,13 @@ public class LoginController<ListController> {
 			Scene viewScene = new Scene(viewParent);
 			Stage window = (Stage)((Node)e.getSource()).getScene().getWindow();
 			
-			admin.initData(allUsers);
+			admin.initData(app, allUsers);
 			admin.start(window);
 			window.setScene(viewScene);
 			window.show();
 		}
 		
 		else {
-			if(allUsers == null) {
-				allUsers = new ArrayList<User>();
-			}
 			
 			User user = null;
 			
@@ -86,7 +113,7 @@ public class LoginController<ListController> {
 				AlbumListController listController = loader.getController();
 				
 				
-				listController.initData(allUsers, user);
+				listController.initData(app, user);
 				listController.start(window);
 				
 				window.setScene(viewScene);
@@ -107,8 +134,8 @@ public class LoginController<ListController> {
 		alert.showAndWait();
 	}
 	
-	public void setAllUsers(ArrayList<User> al) {
-		allUsers = al;
+	public void initData(UsersApp ap) {
+		app = ap;
 	}
 }
 

@@ -5,8 +5,8 @@ import java.util.ArrayList;
 import java.util.Optional;
 
 import Backend.Album;
-import Backend.Photo;
 import Backend.User;
+import Backend.UsersApp;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -37,10 +37,10 @@ public class AlbumListController {
 	private User user;
 	private ObservableList<Album> obsList;
 	
-	private ArrayList<User> allUsers; //just for keeping a list of all users
+	private UsersApp app; //just for keeping a list of all users
 	
-	public void initData(ArrayList<User> users, User u) {
-		allUsers = users;
+	public void initData(UsersApp ap, User u) {
+		app = ap;
 		user = u;
 	}
 	
@@ -68,7 +68,7 @@ public class AlbumListController {
 		Stage window = (Stage)((Node)e.getSource()).getScene().getWindow();
 		AlbumDetailController detail = loader.getController();
 		
-		detail.initData(allUsers, user, selected);
+		detail.initData(app, user, selected);
 		detail.start(window);
 		window.setScene(viewScene);
 		window.show();
@@ -128,7 +128,7 @@ public class AlbumListController {
 		listview.setItems(obsList);
 	}
 	
-	public void logOut(ActionEvent e) throws IOException {
+	public void logOut(ActionEvent e) throws IOException, ClassNotFoundException {
 		
 		String fxml = "Login.fxml";
 		
@@ -140,18 +140,11 @@ public class AlbumListController {
 		
 		Scene viewScene = new Scene(viewParent);
 		Stage window = (Stage)((Node)e.getSource()).getScene().getWindow();
-		//LoginController loginController = loader.getController();
-		
-		try {
-			((LoginController<AlbumListController>)loader.getController()).setAllUsers(allUsers);
-		} catch (Exception ex) {}
-		
-		//loginController.start(window);
+		LoginController login = loader.getController();
+		login.initData(app);
+		login.start(window);
 		window.setScene(viewScene);
 		window.show();
 	}
 	
-	public void setAllUsers(ArrayList<User> al) {
-		allUsers = al;
-	}
 }

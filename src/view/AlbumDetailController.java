@@ -12,6 +12,7 @@ import Backend.Album;
 import Backend.Photo;
 import Backend.Tag;
 import Backend.User;
+import Backend.UsersApp;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -59,7 +60,7 @@ public class AlbumDetailController {
 	@FXML Button copy;
 	@FXML Button move;
 	
-	private ArrayList<User> all_users; 
+	private UsersApp app; 
 	private User user;
 	private ArrayList<Album> all_albums;
 	private Album album;
@@ -74,10 +75,10 @@ public class AlbumDetailController {
 	 * Used for passing the specific albums and album data for the controller to use
 	 * 
 	 * */
-	public void initData(ArrayList<User> allusers, User u, Album selected) {
+	public void initData(UsersApp ap, User u, Album selected) {
 		// TODO Auto-generated method stub
 		
-		all_users = allusers;
+		app = ap;
 		user = u;
 		all_albums = u.getAlbums();
 		album = selected;
@@ -206,7 +207,7 @@ public class AlbumDetailController {
 		Stage window = (Stage)((Node)e.getSource()).getScene().getWindow();
 		AlbumListController albumlist = loader.getController();
 		
-		albumlist.initData(all_users, user);
+		albumlist.initData(app, user);
 		albumlist.start(window);
 		window.setScene(viewScene);
 		window.show();
