@@ -74,6 +74,10 @@ public class AlbumDetailController {
 	/**
 	 * Used for passing the specific albums and album data for the controller to use
 	 * 
+	 * @param ap The UsersApp to write the saved data
+	 * @param u The user data to pass back to AlbumListView
+	 * @param selected The chosen album to be viewed. 
+	 * 
 	 * */
 	public void initData(UsersApp ap, User u, Album selected) {
 		// TODO Auto-generated method stub
@@ -88,6 +92,10 @@ public class AlbumDetailController {
 	
 	/**
 	 * Upon running, loads all the images from stock folder, then displays thumbnails using a cell factory and a listener. 
+	 * 
+	 * When the window is closed, it saves all the data to the user app. 
+	 * 
+	 * @param mainStage
 	 * 
 	 * */
 	public void start(Stage mainStage) throws FileNotFoundException, IOException {
@@ -120,7 +128,14 @@ public class AlbumDetailController {
 			
 	}
 	
-
+	/**
+	 * 
+	 * ImageCell is a type of cell that allows for the listview to display a 50x50 thumbnail image along with
+	 * it's caption right next to it. 
+	 * 
+	 * Due to grading purposes we made the imageviews small, so the resolution and quality is low when uploading the images. 
+	 * 
+	 * */
 	static class ImageCell extends ListCell<Photo> {
         @Override
         public void updateItem(Photo item, boolean empty) {
@@ -145,7 +160,13 @@ public class AlbumDetailController {
         }
     }
 	
-	
+	/**
+	 * 
+	 * A listener for the selected photo. Once a photo is selected it displays it's thumbnail, caption, and tags
+	 * 
+	 * Due to grading purposes we made the thumbnails small, so the resolution and quality is low when the images is expanded.
+	 * 
+	 * */
 	private void selectedPhoto(Stage mainStage) {
 
 		try {
@@ -173,6 +194,13 @@ public class AlbumDetailController {
 
 	}
 	
+	/**
+	 * 
+	 * Eventhandler for editing the tags. When the 'edit tags' button is pressed, the function calls a dialogue
+	 * view that lets the user add, edit, and delete tags. Once the dialogue is closed, the photo is updated.
+	 * 
+	 * */
+	
 	public void gotoTags(ActionEvent e) throws IOException {
 		
 		Photo selected = obsList.get(thumbnail_view.getSelectionModel().getSelectedIndex());
@@ -195,6 +223,13 @@ public class AlbumDetailController {
 		
 	}
 	
+	
+	/**
+	 * 
+	 * Eventhandler responsible for going back to the AlbumListView. Passes it's stored UserApp and user data
+	 * back to the view to display all the user's albums. 
+	 * 
+	 * */
 	public void backtoAlbum(ActionEvent e) throws IOException {
 		
 		FXMLLoader loader = new FXMLLoader();
@@ -213,6 +248,13 @@ public class AlbumDetailController {
 		window.show();
 	}
 	
+	
+	/**
+	 * 
+	 * Event handler for editing the caption. When pressing 'Edit Caption' button, it opens up a TextInput
+	 * Dialog which asks the user to input a caption. Once it gets a result, it immidiately recaptions and updates the Photo. 
+	 * 
+	 * */
 	public void editCaption() {
 		
 		TextInputDialog dialog = new TextInputDialog("Enter Caption here");
@@ -234,6 +276,15 @@ public class AlbumDetailController {
 		
 	}
 	
+	
+	/**
+	 * 
+	 * Eventhandler for the slideshow buttons. 
+	 * 
+	 * @param e If '>>' selects the Photo the "right" (The Image ListView is vertical, so below) 
+	 * and '<<' selects the photo to the "left".
+	 * 
+	 * */
 	public void next_prev_Photo(ActionEvent e) {
 		Button command = (Button) e.getSource();
 		int index = (command == slide_right) ? thumbnail_view.getSelectionModel().getSelectedIndex() + 1 : 
@@ -242,7 +293,13 @@ public class AlbumDetailController {
 		thumbnail_view.getSelectionModel().select(index);
 	}
 	
-	
+	/**
+	 * 
+	 * Essentially refreshes the photo, making sure the controller dispalys the right caption and the right tags. 
+	 * 
+	 * @param p The Photo you want to refresh
+	 * 
+	 * */
 	public void updatePhoto(Photo p) {
 		
 		p.reDate();
@@ -277,6 +334,11 @@ public class AlbumDetailController {
 		 }
 	}
 	
+	/**
+	 * 
+	 * A helper method that refreshes the whole album
+	 * 
+	 * */
 	public void updateAlbum() {
 		
 		obsList = FXCollections.observableArrayList(album.getPhotos());
@@ -284,6 +346,14 @@ public class AlbumDetailController {
 
 	}
 	
+	/**
+	 * Eventhandler for the 'move' and copy buttons. First, a choicebox dialogue opens up allowing the user to choose which
+	 * album they want to move the selected photo to. If they confirm an album, the photo is either copied or moved
+	 * depending on the album. 
+	 * 
+	 * @param e ActionEvent can either be 'move' or 'copy' buttons
+	 * 
+	 * */
 	public void photo_manuver(ActionEvent e) {
 		
 		Photo selected = obsList.get(thumbnail_view.getSelectionModel().getSelectedIndex());
@@ -312,6 +382,12 @@ public class AlbumDetailController {
 
 	}
 	
+	/**
+	 * 
+	 * Eventhandling for removing the photo from the album. 
+	 * 
+	 * */
+	
 	public void removePhoto() {
 		
 		int index = thumbnail_view.getSelectionModel().getSelectedIndex();
@@ -322,6 +398,16 @@ public class AlbumDetailController {
 		updateAlbum();
 	}
 	
+	
+	/**
+	 * 
+	 * Takes a photo, and copies it from one album to another.
+	 * 
+	 * @param p The photo you want to copy
+	 * @param a The Source Album you're copying the photo from
+	 * @param b The Destination Album you're copying the photo to
+	 * 
+	 * */
 	public boolean copyTo(Photo p, Album a, Album b) {
 		if(!(a.contains(p)) || b.contains(p))
 			return false;
@@ -331,6 +417,15 @@ public class AlbumDetailController {
 		return true;
 	}
 	
+	/**
+	 * 
+	 * Takes a photo, and moves it from one album to another.
+	 * 
+	 * @param p The photo you want to move
+	 * @param a The Source Album you're moving, and removing the photo from
+	 * @param b The Destination Album you're moving the photo to
+	 * 
+	 * */
 	public boolean moveTo(Photo p, Album a, Album b) {
 		if(!(a.contains(p)) || b.contains(p))
 			return false;
