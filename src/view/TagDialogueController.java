@@ -8,6 +8,7 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.scene.control.*;
 import javafx.scene.control.Alert.AlertType;
 import javafx.scene.text.Text;
@@ -68,7 +69,7 @@ public class TagDialogueController {
 			if(tag.name().length() > 0 && tag.value().length() > 0) {
 
 				if(!obsList.contains(tag)) {
-					obsList.add(tag);
+					photo.tag(tag);
 
 					name_field.clear();
 					value_field.clear();
@@ -91,7 +92,7 @@ public class TagDialogueController {
 				if(tag.equals(obsList.get(index)) || !obsList.contains(tag)) {
 					//System.out.println("valid edit!");
 					
-					obsList.set(index, tag);
+					photo.set(index, tag);
 
 					name_field.clear();
 					value_field.clear();
@@ -107,9 +108,9 @@ public class TagDialogueController {
 			}
 		}
 
-		else{
+		else {
 
-			obsList.remove(index);
+			photo.removeTag(index);
 			if(obsList.size() > 0) {
 				
 				if(index == obsList.size()) 
@@ -126,6 +127,8 @@ public class TagDialogueController {
 			}
 				
 		}
+		
+		updatePhoto();
 
 	}
 
@@ -160,6 +163,7 @@ public class TagDialogueController {
 	
 	public void updatePhoto() {
 		obsList = FXCollections.observableArrayList(photo.getTags());
+		listView.setItems(obsList);
 	}
 
 	private void disableButtons(){

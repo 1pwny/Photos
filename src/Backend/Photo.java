@@ -119,6 +119,12 @@ public class Photo {
 	public boolean removeTag(String name, String value) {
 		return tags.remove(new Tag(name, value));
 	}
+	
+	public void removeTag(int index) {
+		// TODO Auto-generated method stub
+		tags.remove(index);
+		
+	}
 
 	public void tag(Tag t) {
 		if(!tags.contains(t))
@@ -156,7 +162,10 @@ public class Photo {
 	 * updates the date of this picture
 	 */
 	public void reDate() {
-		date = new Date((new File(path)).lastModified());
+		Calendar c = Calendar.getInstance();
+		c.set(Calendar.MILLISECOND, 0);
+
+		date = c.getTime();;
 	}
 
 	public String toString() {
@@ -186,5 +195,12 @@ public class Photo {
 		// TODO Auto-generated method stub
 		return tags;
 	}
+
+	public void set(int index, Tag tag) {
+		// TODO Auto-generated method stub
+		tags.set(index, tag);
+		
+	}
+
 	
 }

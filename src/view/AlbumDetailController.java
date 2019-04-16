@@ -10,6 +10,7 @@ import java.util.Optional;
 
 import Backend.Album;
 import Backend.Photo;
+import Backend.Tag;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -22,8 +23,10 @@ import javafx.scene.control.Button;
 import javafx.scene.control.ChoiceDialog;
 import javafx.scene.control.ListCell;
 import javafx.scene.control.ListView;
+import javafx.scene.control.TextInputDialog;
 import javafx.stage.FileChooser;
 import javafx.stage.FileChooser.ExtensionFilter;
+import javafx.stage.Modality;
 import javafx.stage.Stage;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
@@ -109,44 +112,6 @@ public class AlbumDetailController {
 			
 	}
 	
-	
-	private void selectedPhoto(Stage mainStage) {
-
-		try {
-
-			Photo selected = obsList.get(thumbnail_view.getSelectionModel().getSelectedIndex());
-			//enableButtons();
-
-			slideshow_view.setImage(selected.getImage());
-			caption_text.setText(selected.getCaption());
-			date_text.setText(df.format(selected.date()));
-		}
-
-		catch(IndexOutOfBoundsException e){
-		}
-
-	}
-	
-	public void gotoTags(ActionEvent e) throws IOException {
-		
-		Photo selected = obsList.get(thumbnail_view.getSelectionModel().getSelectedIndex());
-		
-		FXMLLoader loader = new FXMLLoader();
-		loader.setLocation(getClass().getResource("TagDialogue.fxml"));
-		
-		Parent viewParent = loader.load();
-		
-		Scene viewScene = new Scene(viewParent);
-		Stage window = new Stage();
-		TagDialogueController detail = loader.getController();
-		
-		detail.initData(selected);
-		detail.start(window);
-		window.setScene(viewScene);
-		window.show();
-		
-	}
-
 
 	static class ImageCell extends ListCell<Photo> {
         @Override
@@ -172,6 +137,101 @@ public class AlbumDetailController {
         }
     }
 	
+	
+	private void selectedPhoto(Stage mainStage) {
+
+		try {
+
+			Photo selected = obsList.get(thumbnail_view.getSelectionModel().getSelectedIndex());
+
+			slideshow_view.setImage(selected.getImage());
+			caption_text.setText(selected.getCaption());
+			date_text.setText(df.format(selected.date()));
+			
+			String tags = "";
+			
+			for(Tag t: selected.getTags()) {
+				
+				tags += "(" + t.toString() + "),";
+			}
+			
+			tags_text.setText(tags);
+			
+		}
+
+		catch(IndexOutOfBoundsException e){
+		}
+
+	}
+	
+	public void gotoTags(ActionEvent e) throws IOException {
+		
+		Photo selected = obsList.get(thumbnail_view.getSelectionModel().getSelectedIndex());
+		
+		FXMLLoader loader = new FXMLLoader();
+		loader.setLocation(getClass().getResource("TagDialogue.fxml"));
+		
+		Parent viewParent = loader.load();
+		
+		Scene viewScene = new Scene(viewParent);
+		Stage window = new Stage();
+		TagDialogueController detail = loader.getController();
+		
+		detail.initData(selected);
+		detail.start(window);
+		window.setScene(viewScene);
+		window.initModality(Modality.APPLICATION_MODAL);
+		window.showAndWait();
+		updatePhoto(selected);
+		
+	}
+	
+	public void editCaption() {
+		
+		TextInputDialog dialog = new TextInputDialog("Enter Caption here");
+		 
+		dialog.setTitle("Caption");
+		dialog.setHeaderText("What do you want to name this photo?");
+		dialog.setContentText("Caption:");
+		 
+		Optional<String> result = dialog.showAndWait();
+		
+		if(result.isPresent()) {
+			
+			Photo selected = obsList.get(thumbnail_view.getSelectionModel().getSelectedIndex());
+			selected.recaption(result.get());
+			updatePhoto(selected);
+			thumbnail_view.refresh();
+		}
+		
+		
+	}
+	
+	public void next_prev_Photo(ActionEvent e) {
+		Button command = (Button) e.getSource();
+		int index = (command == slide_right) ? thumbnail_view.getSelectionModel().getSelectedIndex() + 1 : 
+												thumbnail_view.getSelectionModel().getSelectedIndex() - 1; 
+		
+		thumbnail_view.getSelectionModel().select(index);
+	}
+	
+	
+	public void updatePhoto(Photo p) {
+		
+		p.reDate();
+		caption_text.setText(p.getCaption());
+		String tags = "";
+		
+		for(Tag t: p.getTags()) {
+			
+			tags += "[" + t.toString() + "], ";
+		}
+		
+		tags_text.setText(tags);
+
+	}
+
+	
 	public void uploadPhoto() {
 		
 		FileChooser fileChooser = new FileChooser();
@@ -186,7 +246,6 @@ public class AlbumDetailController {
 			Photo photo = new Photo(selectedFile.toURI().toString(), selectedFile.getName(), 50, 50);
 			Boolean b = album.addPhoto(photo);
 			updateAlbum();
-			//obsList.add(photo);
 			
 		 }
 	}
@@ -195,6 +254,7 @@ public class AlbumDetailController {
 		
 		obsList = FXCollections.observableArrayList(album.getPhotos());
 		thumbnail_view.setItems(obsList);
+
 	}
 	
 	public void photo_manuver(ActionEvent e) {
@@ -223,6 +283,16 @@ public class AlbumDetailController {
 			
 		}
 
+	}
+	
+	public void removePhoto() {
+		
+		int index = thumbnail_view.getSelectionModel().getSelectedIndex()
+		Photo selected = obsList.get(index);
+		// obsList.remove(thumbnail_view.getSelectionModel().getSelectedIndex());
+		album.removePhoto(selected);
+		thumbnail_view.getSelectionModel().select(index - 1);
+		updateAlbum();
 	}
 	
 	public boolean copyTo(Photo p, Album a, Album b) {

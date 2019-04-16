@@ -58,7 +58,7 @@ public class Tag {
 	 */
 	@Override
 	public String toString() {
-		return name() + " | " + value();
+		return name() + ": " + value();
 	}
 	/**
 	 * checks if the Tag is equal to a given object
