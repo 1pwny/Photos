@@ -287,7 +287,7 @@ public class AlbumDetailController {
 	
 	public void removePhoto() {
 		
-		int index = thumbnail_view.getSelectionModel().getSelectedIndex()
+		int index = thumbnail_view.getSelectionModel().getSelectedIndex();
 		Photo selected = obsList.get(index);
 		// obsList.remove(thumbnail_view.getSelectionModel().getSelectedIndex());
 		album.removePhoto(selected);
