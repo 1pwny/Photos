@@ -10,16 +10,20 @@ import Backend.UsersApp;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
+import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.ListView;
 import javafx.scene.control.TextField;
 import javafx.scene.control.TextInputDialog;
+import javafx.scene.control.Alert.AlertType;
 import javafx.stage.Stage;
+import javafx.stage.WindowEvent;
 
 
 public class AlbumListController {
@@ -36,6 +40,7 @@ public class AlbumListController {
 	
 	private User user;
 	private ObservableList<Album> obsList;
+	private Stage stage_var;
 	
 	private UsersApp app; //just for keeping a list of all users
 	
@@ -48,10 +53,22 @@ public class AlbumListController {
 		// create list of items
 		// form arraylist
 		
+		stage_var = primaryStage;
 		primaryStage.setTitle(user.username);
 		
 		obsList = FXCollections.observableArrayList(user.getAlbums());
 		listview.setItems(obsList);
+		
+		primaryStage.setOnCloseRequest(param -> {
+			
+			try {
+				app.writeApp();
+			} 
+			
+			catch (IOException e) {
+				errorMessage("Something went wrong, your changes will not be saved");
+			
+		}});
 		
 	}
 	
@@ -102,6 +119,17 @@ public class AlbumListController {
 		
 		updateList();
 	}
+	
+	private void errorMessage(String message) {
+		/* To be completed */
+
+		Alert alert = new Alert(AlertType.INFORMATION);
+		alert.initOwner(stage_var);
+		alert.setTitle("Error!");
+		alert.setHeaderText(message);
+		alert.showAndWait();
+	}
+	
 	public void renAlbum() {
 		int index = listview.getSelectionModel().getSelectedIndex();
 		
@@ -130,10 +158,10 @@ public class AlbumListController {
 	
 	public void logOut(ActionEvent e) throws IOException, ClassNotFoundException {
 		
-		String fxml = "Login.fxml";
+		app.writeApp();
 		
 		FXMLLoader loader = new FXMLLoader();
-		loader.setLocation(getClass().getResource(fxml));
+		loader.setLocation(getClass().getResource("Login.fxml"));
 		
 		Parent viewParent = loader.load();
 		
@@ -141,7 +169,7 @@ public class AlbumListController {
 		Scene viewScene = new Scene(viewParent);
 		Stage window = (Stage)((Node)e.getSource()).getScene().getWindow();
 		LoginController login = loader.getController();
-		login.initData(app);
+		login.initData(null);
 		login.start(window);
 		window.setScene(viewScene);
 		window.show();
