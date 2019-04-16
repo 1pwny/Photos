@@ -37,11 +37,12 @@ public class LoginController<ListController> {
 			Parent viewParent = loader.load();
 			
 			AdminController admin = loader.getController();
-			admin.initData(allUsers);
-			
+
 			Scene viewScene = new Scene(viewParent);
 			Stage window = (Stage)((Node)e.getSource()).getScene().getWindow();
 			
+			admin.initData(allUsers);
+			admin.start(window);
 			window.setScene(viewScene);
 			window.show();
 		}

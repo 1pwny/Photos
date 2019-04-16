@@ -32,6 +32,14 @@ public class User implements Serializable{
 		albums = new ArrayList<Album>();
 		username = name;
 	}
+	
+	public boolean equals(Object o) {
+		if(o instanceof User) {
+			return this.toString().equals(((User)o).toString());
+		}
+
+		return false;
+	}
 
 	/**
 	 * adds an Album to the User's album list

@@ -167,6 +167,7 @@ public class AlbumDetailController {
 		}
 
 		catch(IndexOutOfBoundsException e){
+			
 		}
 
 	}

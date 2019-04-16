@@ -12,11 +12,11 @@
   <items>
     <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="160.0" prefWidth="100.0">
          <children>
-            <ListView fx:id="user_list" layoutX="10.0" layoutY="14.0" prefHeight="369.0" prefWidth="201.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" />
+            <ListView fx:id="listview" layoutX="10.0" layoutY="14.0" prefHeight="369.0" prefWidth="201.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" />
          </children></AnchorPane>
     <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="160.0" prefWidth="100.0">
          <children>
-            <Text layoutX="14.0" layoutY="106.0" strokeType="OUTSIDE" strokeWidth="0.0" text="[Selected Username Displayed Here]" wrappingWidth="286.1367416381836">
+            <Text fx:id="user_text" layoutX="14.0" layoutY="106.0" strokeType="OUTSIDE" strokeWidth="0.0" text="[Selected Username Displayed Here]" wrappingWidth="286.1367416381836">
                <font>
                   <Font name="Source Code Pro" size="14.0" />
                </font>
@@ -26,13 +26,13 @@
                   <Font name="Source Code Pro Medium" size="22.0" />
                </font>
             </Text>
-            <Button fx:id="delete" layoutX="14.0" layoutY="125.0" minHeight="18.0" mnemonicParsing="false" prefHeight="34.0" prefWidth="86.0" style="-fx-background-color: #dc0404; -fx-font-family: Source Code Pro;" text="Delete User" textFill="WHITE">
+            <Button fx:id="delete" onAction="#add_remove_User" layoutX="14.0" layoutY="125.0" minHeight="18.0" mnemonicParsing="false" prefHeight="34.0" prefWidth="86.0" style="-fx-background-color: #dc0404; -fx-font-family: Source Code Pro;" text="Delete User" textFill="WHITE">
                <font>
                   <Font name="Source Code Pro" size="10.0" />
                </font>
             </Button>
             <TextField fx:id="user" layoutX="13.0" layoutY="235.0" prefHeight="25.0" prefWidth="286.0" promptText="Enter Username" />
-            <Button fx:id="add" layoutX="14.0" layoutY="282.0" mnemonicParsing="false" prefHeight="28.0" prefWidth="101.0" style="-fx-font-family: Source Code Pro; -fx-font-size: 11;" text="Create New User">
+            <Button fx:id="add" onAction="#add_remove_User" layoutX="14.0" layoutY="282.0" mnemonicParsing="false" prefHeight="28.0" prefWidth="101.0" style="-fx-font-family: Source Code Pro; -fx-font-size: 11;" text="Create New User">
                <font>
                   <Font name="Source Code Pro" size="10.0" />
                </font>
