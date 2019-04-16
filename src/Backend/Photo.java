@@ -116,16 +116,17 @@ public class Photo {
 	 * @param s: a String to remove
 	 * @return true if a tag with the same value exsts, false if not
 	 */
-	public boolean removeTag(String s) {
-		return tags.remove(new Tag(s));
+	public boolean removeTag(String name, String value) {
+		return tags.remove(new Tag(name, value));
 	}
 
 	public void tag(Tag t) {
 		if(!tags.contains(t))
 			tags.add(t);
 	}
-	public void tag(String s) {
-		Tag t = new Tag(s);
+	
+	public void tag(String n, String v) {
+		Tag t = new Tag(n, v);
 		if(!tags.contains(t))
 			tags.add(t);
 	}
@@ -179,6 +180,11 @@ public class Photo {
 		}
 
 		return false;
+	}
+
+	public ArrayList<Tag> getTags() {
+		// TODO Auto-generated method stub
+		return tags;
 	}
 	
 }

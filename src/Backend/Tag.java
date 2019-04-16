@@ -16,16 +16,19 @@ package Backend;
 
 public class Tag {
 
-	private String t;
+	private String name;
+	private String value;
 	
 	/**
 	 * creates a new Tag with the given value
 	 * 
 	 * @param s: the Tag's value
 	 */
-	public Tag(String s) {
-		t = s;
+	public Tag(String n, String v) {
+		name = n;
+		value = v;
 	}
+	
 	
 	/**
 	 * returns the value of the tag
@@ -33,17 +36,29 @@ public class Tag {
 	 * @return the value of the tag
 	 */
 	public String value() {
-		return t;
+		return value;
+	}
+	
+	public String name() {
+		return name;
+	}
+	
+	public void set_name(String n) {
+		name = n;
+	}
+	
+	public void set_value(String v) {
+		value = v;
 	}
 	
 	/**
-	 * also returns the value of the tag
+	 * returns the name and value of the tag
 	 * 
 	 * @return the value of the tag
 	 */
 	@Override
 	public String toString() {
-		return t;
+		return name() + " | " + value();
 	}
 	/**
 	 * checks if the Tag is equal to a given object
@@ -54,12 +69,13 @@ public class Tag {
 	 */
 	@Override
 	public boolean equals(Object o) {
-		if(o instanceof String) {
-			return t.equals((String)o);
+		if(!(o instanceof Tag)) {
+			if(o instanceof String)
+			return this.value().equals((String)o);
 		}
 		
 		if(o instanceof Tag) {
-			return t.equals(((Tag)o).t);
+			return this.value().equals(((Tag) o).value()) && this.name().equals(((Tag) o).name());
 		}
 		
 		return false;

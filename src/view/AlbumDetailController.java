@@ -14,6 +14,10 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Node;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.ChoiceDialog;
 import javafx.scene.control.ListCell;
@@ -123,6 +127,27 @@ public class AlbumDetailController {
 
 	}
 	
+	public void gotoTags(ActionEvent e) throws IOException {
+		
+		Photo selected = obsList.get(thumbnail_view.getSelectionModel().getSelectedIndex());
+		
+		FXMLLoader loader = new FXMLLoader();
+		loader.setLocation(getClass().getResource("TagDialogue.fxml"));
+		
+		Parent viewParent = loader.load();
+		
+		Scene viewScene = new Scene(viewParent);
+		Stage window = new Stage();
+		TagDialogueController detail = loader.getController();
+		
+		detail.initData(selected);
+		detail.start(window);
+		window.setScene(viewScene);
+		window.show();
+		
+	}
+
+
 	static class ImageCell extends ListCell<Photo> {
         @Override
         public void updateItem(Photo item, boolean empty) {
@@ -199,7 +224,6 @@ public class AlbumDetailController {
 		}
 
 	}
-	
 	
 	public boolean copyTo(Photo p, Album a, Album b) {
 		if(!(a.contains(p)) || b.contains(p))
