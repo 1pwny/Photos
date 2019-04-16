@@ -129,6 +129,7 @@ public class AlbumListController {
 	}
 	
 	public void logOut(ActionEvent e) throws IOException {
+		
 		String fxml = "Login.fxml";
 		
 		FXMLLoader loader = new FXMLLoader();

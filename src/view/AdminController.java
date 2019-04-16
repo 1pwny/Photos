@@ -1,4 +1,5 @@
 package view;
+import java.io.IOException;
 import java.util.ArrayList;
 
 import Backend.Tag;
@@ -7,6 +8,10 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Node;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.ListView;
@@ -24,6 +29,7 @@ public class AdminController {
 	@FXML ListView<User> listview;
 	@FXML Button add;
 	@FXML Button delete;
+	@FXML Button logout;
 	
 	private ArrayList<User> user_list;
 	private ObservableList<User> obsList;
@@ -114,6 +120,25 @@ public class AdminController {
 		updateList();
 	}
 	
+	public void logOut(ActionEvent e) throws IOException {
+		
+		FXMLLoader loader = new FXMLLoader();
+		loader.setLocation(getClass().getResource("Login.fxml"));
+		
+		Parent viewParent = loader.load();
+		
+		
+		Scene viewScene = new Scene(viewParent);
+		Stage window = (Stage)((Node)e.getSource()).getScene().getWindow();
+		
+		LoginController login = loader.getController();
+		login.setAllUsers(user_list);
+		login.start(window);
+		
+		//loginController.start(window);
+		window.setScene(viewScene);
+		window.show();
+	}
 
 	public void updateList() {
 		obsList = FXCollections.observableArrayList(user_list);
