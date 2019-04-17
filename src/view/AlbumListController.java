@@ -278,6 +278,11 @@ public class AlbumListController {
 					allresults.add(p);
 		}
 		
+		if(allresults.size() == 0) {
+			errorMessage("No such photos");
+			return;
+		}
+		
 		FXMLLoader loader = new FXMLLoader();
 		loader.setLocation(getClass().getResource("SearchView.fxml"));
 		
@@ -285,10 +290,10 @@ public class AlbumListController {
 		
 		Scene viewScene = new Scene(viewParent);
 		Stage window = (Stage)((Node)e.getSource()).getScene().getWindow();
-		SearchViewController detail = loader.getController();
+		SearchViewController search = loader.getController();
 		
-		detail.initData(app, user, allresults);
-		detail.start(window);
+		search.initData(app, user, allresults, st);
+		search.start(window);
 		window.setScene(viewScene);
 		window.show();
 	}

@@ -123,9 +123,33 @@ public class SearchTerm {
 		return false;
 	}
 	
+	/**
+	 * tries to print out the searched values in a reasonable manner
+	 * 
+	 */
+	public String toString() {
+		if(!isValid)
+			return "invalid search";
+		
+		String ret = "[" + t1.toString();
+		
+		if(andor == 'a') {
+			ret += "] and [" + t2.toString();
+		} else if(andor == 'o') {
+			ret += "] or [" + t2.toString();
+		}
+		
+		ret += "], ";
+		
+		ret += (early == null) ? "any date" : (new SimpleDateFormat("MM/dd/yyyy").format(early));
+		ret += " - ";
+		ret += (late == null) ? "any date" : (new SimpleDateFormat("MM/dd/yyyy").format(late));
+		
+		return ret;
+	}
 	
 	public static void main(String[] args) throws FileNotFoundException {
-		SearchTerm st = new SearchTerm("name=Sammy AND hair=brown","1/1/1991", "9/9/2020");
+		SearchTerm st = new SearchTerm("name=Sammy or hair=brown","1/1/1991", "9/9/2020");
 		//System.out.println(st.t1);
 		//System.out.println(st.t2);
 		//System.out.println(st.early);
@@ -133,9 +157,11 @@ public class SearchTerm {
 		//System.out.println(st.isValid);
 		//System.out.println(st.andor);
 		
-		Photo p = new Photo("./stock_folor/dice.png");
-		p.tag("name","Sammy");
-		p.tag("hair","brown");
+		//Photo p = new Photo("./stock_folor/dice.png");
+		//p.tag("name","Sammy");
+		//p.tag("hair","brown");
 		//System.out.println(st.allows(p));
+		
+		System.out.println(st);
 	}
 }

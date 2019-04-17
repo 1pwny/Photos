@@ -5,11 +5,11 @@
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.layout.Pane?>
 
-<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1">
+<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="view.SearchViewController">
    <children>
       <ListView fx:id="resultList" layoutX="11.0" layoutY="9.0" prefHeight="335.0" prefWidth="577.0" />
       <Button fx:id="makeAlbum" layoutX="480.0" layoutY="355.0" mnemonicParsing="false" prefHeight="32.0" prefWidth="106.0" text="Make Album" />
-      <TextField fx:id="searchBar" layoutX="51.0" layoutY="358.0" prefHeight="26.0" prefWidth="209.0" promptText="Search" />
+      <TextField fx:id="searchBar" layoutX="13.0" layoutY="358.0" onAction="#onEnter" prefHeight="26.0" prefWidth="247.0" promptText="input query here, then press enter" />
       <TextField fx:id="startDate" layoutX="270.0" layoutY="359.0" prefHeight="26.0" prefWidth="89.0" promptText="start date" />
       <TextField fx:id="endDate" layoutX="366.0" layoutY="358.0" prefHeight="26.0" prefWidth="89.0" promptText="end date" />
    </children>
