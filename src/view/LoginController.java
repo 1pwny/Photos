@@ -27,6 +27,14 @@ import javafx.scene.control.TextField;
 import javafx.scene.control.Alert.AlertType;
 import javafx.stage.Stage; 
 
+/**
+ * 
+ * This controller is responsible for handling the Login Screen for the user, and is also the controller
+ * responsible for reading the stored serialized data.
+ * 
+ * @author Anand Raju
+ * @author Sammy Berger
+ * */
 public class LoginController<ListController> {
 
 
@@ -38,6 +46,14 @@ public class LoginController<ListController> {
 	
 	private Stage stage_var;
 	
+	
+	/**
+	 * 
+	 * 
+	 * Upon starting, the controller checks to see if there's any user data, and if there is, loads the
+	 * stored data and gets a list of all the saved users on the app. 
+	 * 
+	 * */
 	public void start(Stage mainStage) throws ClassNotFoundException, IOException {
 		stage_var = mainStage;
 		
@@ -66,6 +82,11 @@ public class LoginController<ListController> {
 		
 	}
 	
+	/**
+	 * 
+	 * Helper method that creates the Stock User, who contains all the stock photos. 
+	 * 
+	 * */
 	private void loadStockUser() {
 		
 		User stock = new User("Stock");
@@ -97,6 +118,13 @@ public class LoginController<ListController> {
 		app.getUsers().add(stock);
 	}
 	
+	/**
+	 * 
+	 * Helper method to get path to the stock_folder
+	 * 
+	 * @return path to the stock images folder
+	 * 
+	 * */
 	private String path() {
 		
 		try {
@@ -110,6 +138,22 @@ public class LoginController<ListController> {
 		}
 	}
 	
+	
+	/**
+	 * 
+	 * 
+	 * EventHandler for when the user submits a username. 
+	 * 
+	 * If the name is 'admin', this controller passes data to the AdminController and sends the user to the
+	 * AdminView. 
+	 * 
+	 * Otherwise, the controller checks to see if a user with the username exists, if it does, it passes
+	 * data to the AlbumListController and sends the user to his list of Albums.
+	 * 
+	 * If that user doesn't exist, it shows an error saying the user doesn't exist. 
+	 * 
+	 * 
+	 * */
 	public void gotoUser(ActionEvent e) throws IOException {
 		
 		String name = login_field.getText();
@@ -175,6 +219,13 @@ public class LoginController<ListController> {
 		
 	}
 	
+	/**
+	 * 
+	 * Makes and error message pop up with custom message
+	 * 
+	 * @param message  the message you want to show
+	 * 
+	 * */
 	private void errorMessage(String message) {
 
 		Alert alert = new Alert(AlertType.INFORMATION);
@@ -184,6 +235,11 @@ public class LoginController<ListController> {
 		alert.showAndWait();
 	}
 	
+	/**
+	 * 
+	 * Method responsible for passing data to the LoginController
+	 * 
+	 * */
 	public void initData(UsersApp ap) {
 		app = ap;
 	}
