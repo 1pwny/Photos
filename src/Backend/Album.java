@@ -14,6 +14,8 @@ package Backend;
 
 import java.io.FileNotFoundException;
 import java.io.Serializable;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 
@@ -195,13 +197,14 @@ public class Album implements Serializable {
 	}
 	
 	/**
-	 * returns the album name for easy ListView use
+	 * returns the album name alongside Earliest and Latest dates and number of photos for easy ListView use
 	 * 
 	 * @return the name of the album
 	 */
 	@Override
 	public String toString() {
-		return name;
+		return name + " (" + formatetdDate(earliest, "MM/dd/yyyy") + ", " + formatetdDate(latest, "MM/dd/yyyy") + ")" 
+					+ " Num Photos: " + photos.size();
 	}
 	
 	/**
@@ -211,5 +214,19 @@ public class Album implements Serializable {
 	 */
 	public void rename(String n) {
 		name = n;
+	}
+	
+	/**
+	 * renames the album
+	 * 
+	 * @param d Date you want to format
+	 * @param s The actual date format in string form
+	 * 
+	 * @return a string of the formatted date
+	 */
+	public String formatetdDate(Date d, String s) {
+		
+		DateFormat df = new SimpleDateFormat(s);
+		return df.format(d);
 	}
 }
