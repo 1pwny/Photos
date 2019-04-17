@@ -12,6 +12,7 @@ import java.io.Serializable;
 import java.util.ArrayList;
 
 import Backend.Album;
+import Backend.Photo;
 import Backend.User;
 import Backend.UsersApp;
 import javafx.event.ActionEvent;
@@ -46,18 +47,67 @@ public class LoginController<ListController> {
 				
 				app = new UsersApp(allUsers);
 				app = app.readApp();
-				System.out.print("Got Something!");
+				// System.out.print("Got Something!");
+				allUsers = app.getUsers();
 				
 			}
 			
 			catch(FileNotFoundException e) {
-				System.out.print("No file to be found");
+				// System.out.print("No file to be found");
 				app = new UsersApp(allUsers);
+				loadStockUser();
+				allUsers = app.getUsers();
+
 			}	
 		}
 		
-		allUsers = app.getUsers();
+		else
+			allUsers = app.getUsers();
 		
+	}
+	
+	private void loadStockUser() {
+		
+		User stock = new User("Stock");
+		Album newAl = new Album("Stock_Images");
+		String path = path();
+		
+		if(path != "") {
+			
+			File stock_folder = new File(path);
+			File[] files = null;
+			
+			if(stock_folder.isDirectory())
+				files = stock_folder.listFiles();
+			
+			for(File file : files) {
+				String name1 = file.getName();
+				try {
+					Boolean b = newAl.addPhoto(new Photo(path + "/" + name1, name1));
+					
+				} catch (FileNotFoundException e) {
+					
+					//errorMessage("Couldn't add photo");
+				}
+			}
+			
+		}
+		
+		stock.addAlbum(newAl);
+		app.getUsers().add(stock);
+	}
+	
+	private String path() {
+		
+		try {
+			
+			return new File(".").getCanonicalPath() + "/stock_folder";
+			
+		} catch (IOException e) {
+
+			errorMessage("Can't Load Stock Images");
+			return "";
+		}
 	}
 	
 	public void gotoUser(ActionEvent e) throws IOException {

@@ -112,23 +112,18 @@ public class AlbumListController {
 			Album newAl = new Album(name);
 			String path = path();
 			
-			if(path != "") {
+			Album stock = app.getUser("Stock").getAlbum("Stock_Images");
+			
+			for(Photo p: stock.getPhotos()) {
 				
-				File stock_folder = new File(path);
-				File[] files = null;
+				String caption = p.getCaption();
 				
-				if(stock_folder.isDirectory())
-					files = stock_folder.listFiles();
-				
-				for(File file : files) {
-					String name1 = file.getName();
-					try {
-						Boolean b = newAl.addPhoto(new Photo(path + "/" + name1, name1));
-						
-					} catch (FileNotFoundException e) {
-						
-						errorMessage("Couldn't add photo");
-					}
+				try {
+					Boolean b = newAl.addPhoto(new Photo(path + "/" + caption, caption));
+					
+				} catch (FileNotFoundException e) {
+					
+					//errorMessage("Couldn't add photo");
 				}
 				
 			}

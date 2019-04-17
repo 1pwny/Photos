@@ -90,6 +90,18 @@ public class User implements Serializable {
 		return albums.remove(index);
 	}
 	
+	public Album getAlbum(String name) {
+		
+		Album get = new Album(name);
+		for(Album a: albums) {
+			
+			if(get.equals(a))
+				return a;
+		}
+		
+		return null;
+	}
+	
 	/**
 	 * returns all the User's albums
 	 * 

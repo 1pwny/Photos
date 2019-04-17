@@ -44,4 +44,16 @@ public class UsersApp implements Serializable {
 		return app_users;
 	}
 	
+	public User getUser(String name) {
+		
+		User get = new User(name);
+		for(User a: app_users) {
+			
+			if(get.equals(a))
+				return a;
+		}
+		
+		return null;
+	}
+	
 }
