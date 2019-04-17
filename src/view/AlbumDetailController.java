@@ -129,8 +129,14 @@ public class AlbumDetailController {
 			
 	}
 	
+	/**
+	 * 
+	 * Makes and error message pop up with custom message
+	 * 
+	 * @param message  the message you want to show
+	 * 
+	 * */
 	private void errorMessage(String message) {
-		/* To be completed */
 
 		Alert alert = new Alert(AlertType.INFORMATION);
 		alert.initOwner(stage_var);
@@ -326,7 +332,12 @@ public class AlbumDetailController {
 
 	}
 
-	
+	/**
+	 * 
+	 * Eventhandler for adding a photo to the Album. The function opens a FileChooser and allows the user to add
+	 * a photo from their library.
+	 * 
+	 * */
 	public void uploadPhoto() throws FileNotFoundException {
 		
 		FileChooser fileChooser = new FileChooser();

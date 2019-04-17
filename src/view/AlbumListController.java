@@ -28,7 +28,14 @@ import javafx.scene.control.Alert.AlertType;
 import javafx.stage.Stage;
 import javafx.stage.WindowEvent;
 
-
+/**
+ * This controller is responsible for showing the list of albums created under this user.
+ * 
+ * @author Anand Raju
+ * @author Sammy Berger
+ * 
+ * 
+ */
 public class AlbumListController {
 
 	@FXML ListView<Album> listview;
@@ -47,10 +54,26 @@ public class AlbumListController {
 	
 	private UsersApp app; //just for keeping a list of all users
 	
+	/**
+	 * 
+	 * Method for passing data to the controller
+	 * 
+	 * @param ap UsersApp object to grab the stock user
+	 * @param u User data needed to list the albums
+	 * 
+	 * */
 	public void initData(UsersApp ap, User u) {
 		app = ap;
 		user = u;
 	}
+	
+	/**
+	 * 
+	 * Upon starting the controller, the user's albums are put into an observable list. The handler for closing
+	 * the window is also set to save the user's data.
+	 * 
+	 * 
+	 * */
 	
 	public void start(Stage primaryStage) {
 		// create list of items
@@ -75,6 +98,12 @@ public class AlbumListController {
 		
 	}
 	
+	/**
+	 * 
+	 * Eventhandler responsible for opening an Album and listing all its photos. Upon clicking the 
+	 * 'Open' button, the controller passes data to the detial view and switches to the AlbumDetailView.
+	 * 
+	 * */
 	public void gotoDetail(ActionEvent e) throws IOException {
 		
 		Album selected = obsList.get(listview.getSelectionModel().getSelectedIndex());
@@ -95,6 +124,14 @@ public class AlbumListController {
 		
 		
 	}
+	
+	/**
+	 * 
+	 * Eventhandler responsible for creating an Album. Upon clicking the 'create' button, a text input dialogue
+	 * is created asking the user for an album name. Once the user inputs a valid name, the new album is created,
+	 * and each photo from the Stock user's album is added to the newly created album. 
+	 * 
+	 * */
 	
 	public void makeAlbum() throws FileNotFoundException, IOException {
 		TextInputDialog dialog = new TextInputDialog("enter name here");
@@ -134,6 +171,13 @@ public class AlbumListController {
 		});
 	}
 	
+	/**
+	 * 
+	 * Helper method to get path to the stock_folder
+	 * 
+	 * @return path to the stock images folder
+	 * 
+	 * */
 	private String path() {
 		
 		try {
@@ -147,6 +191,12 @@ public class AlbumListController {
 		}
 	}
 	
+	
+	/**
+	 * 
+	 * EventHandler for deleting the selected album from the list
+	 * 
+	 * */
 	public void delAlbum() {
 		int index = listview.getSelectionModel().getSelectedIndex();
 		
@@ -155,6 +205,13 @@ public class AlbumListController {
 		updateList();
 	}
 	
+	/**
+	 * 
+	 * Makes and error message pop up with custom message
+	 * 
+	 * @param message  the message you want to show
+	 * 
+	 * */
 	private void errorMessage(String message) {
 		/* To be completed */
 
@@ -165,6 +222,12 @@ public class AlbumListController {
 		alert.showAndWait();
 	}
 	
+	/**
+	 * 
+	 * EventHandler for renaming a selected Album. Upon clicking the 'edit' button, a TextInput dialogue is
+	 * created. Once the user enters a valid input, the album is renamed. 
+	 * 
+	 * */
 	public void renAlbum() {
 		int index = listview.getSelectionModel().getSelectedIndex();
 		
@@ -185,13 +248,32 @@ public class AlbumListController {
 		    listview.refresh();
 		});
 	}
-	//--------------------
+	
+	
+	
+	/**
+	 * 
+	 * Helper method for simply updating the list after changes
+	 * 
+	 * */
 		
 	public void updateList() {
 		obsList = FXCollections.observableArrayList(user.getAlbums());
 		listview.setItems(obsList);
 	}
 	
+	
+	/**
+	 * 
+	 * Handles logging out to the LoginView when the logout button is pressed. 
+	 * 
+	 * First the event writes to the UsersApp and then sends a null app to the Login Controller such that
+	 * the controller will read a fresh list of updated users upon starting
+	 *
+	 * 
+	 * @param e an Action event.
+	 * 
+	 * */
 	public void logOut(ActionEvent e) throws IOException, ClassNotFoundException {
 		
 		app.writeApp();
