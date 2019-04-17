@@ -14,6 +14,15 @@ import javafx.scene.control.Alert.AlertType;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
 
+/**
+ * 
+ * This is the dialogue controller that creates a seperate window, specifically
+ * to handle adding, edititng and deleting tags. 
+ * 
+ * @author Anand Raju
+ * @author Sammy Berger
+ * 
+ * */
 public class TagDialogueController {
 
 	@FXML ListView<Tag> listView;
@@ -35,13 +44,23 @@ public class TagDialogueController {
 
 	Stage stage_var;
 	
-	
+	/**
+	 * 
+	 * Method responsible for passing data to the TagDialogue Controller
+	 * 
+	 * */
 	public void initData(Photo p) {
 		photo = p;
 		photo_tags = p.getTags();
 	}
 	
-	
+	/**
+	 * 
+	 * Upon starting, the controller sets an observable list of Tags, and adds a listener for each of the 
+	 * selected Tags. 
+	 * 
+	 * 
+	 * */
 	public void start(Stage mainStage) {
 		// create list of items
 		// form arraylist
@@ -57,7 +76,21 @@ public class TagDialogueController {
 		if(obsList.size() > 0)
 			listView.getSelectionModel().select(0);
 	}
-
+	
+	
+	/**
+	 * 
+	 * EventHandler responsible for adding, editing and deleting the tags. Upon clicking the 'add' button.
+	 * The method takes the input from both textfields and creates a new tag if it doesn't exist.
+	 * 
+	 * Clicking the 'edit' button results in the method taking input from the textfields and changing the 
+	 * selected Tag's name and value.
+	 * 
+	 * Clicking the 'delete' button results in the method removing the tag from the list. 
+	 * 
+	 * The photo is then updated to reflect the changes back in the detailview. 
+	 * 
+	 * */
 	public void changeTable(ActionEvent e) {
 
 		Button command = (Button)e.getSource();
@@ -131,7 +164,13 @@ public class TagDialogueController {
 		updatePhoto();
 
 	}
-
+	
+	/**
+	 * 
+	 * Listener method that displays the tag name and tag value upon selection. 
+	 * 
+	 * 
+	 * */
 	private void selectedTag(Stage mainStage) {
 
 		try {
@@ -161,23 +200,45 @@ public class TagDialogueController {
 
 	}
 	
+	/**
+	 * 
+	 * helper method that refreshes the tags on the listview. 
+	 * 
+	 * */
 	public void updatePhoto() {
 		obsList = FXCollections.observableArrayList(photo.getTags());
 		listView.setItems(obsList);
 	}
-
+	
+	/**
+	 * 
+	 * helper method that disables edit and delete buttons when an item in the listview isn't selected.
+	 * 
+	 * */
 	private void disableButtons(){
 
 		edit.setDisable(true);
 		delete.setDisable(true);
 	}
-
+	
+	/**
+	 * 
+	 * helper method that enables edit and delete buttons when an item in the listview is selected.
+	 * 
+	 * */
 	private void enableButtons(){
 
 		edit.setDisable(false);
 		delete.setDisable(false);
 	}
-
+	
+	/**
+	 * 
+	 * helper method that makes a valid Tag based on the input of the textfields
+	 * 
+	 * @return a Tag to be added to the list.
+	 * 
+	 * */
 	private Tag parseTag(Tag t) {
 		
 		Tag tag = new Tag("", "");
@@ -188,6 +249,11 @@ public class TagDialogueController {
 		
 	}
 	
+	/**
+	 * 
+	 * @return Returns text and returns empty if there is nothing in the text field. 
+	 * 
+	 * */
 	private String retText(Tag tag, TextField t) {
 		
 		String tag_text = "";
@@ -202,7 +268,11 @@ public class TagDialogueController {
 		return tag_text;
 	}
 		
-	
+	/**
+	 * 
+	 * @retuns text that is stripped of external spaces and whitespace.
+	 * 
+	 * */
 	public static String removeExternalSpaces(String s) {
 		int starting = 0, ending = 0;
 		
@@ -226,7 +296,15 @@ public class TagDialogueController {
 		
 		return s.substring(starting, ending);
 	}
-
+	
+	
+	/**
+	 * 
+	 * Makes and error message pop up with custom message
+	 * 
+	 * @param message  the message you want to show
+	 * 
+	 * */
 	private void errorMessage(String message) {
 		/* To be completed */
 
@@ -237,7 +315,11 @@ public class TagDialogueController {
 		alert.showAndWait();
 	}
 
-	// Method for when deselecting the item the user chose in the listview when you click outside the list
+	/**
+	 * 
+	 * Method for when deselecting the item the user chose in the listview when you click outside the list
+	 * 
+	 * */
 	public void deselect(){
 
 		listView.getSelectionModel().clearSelection();
