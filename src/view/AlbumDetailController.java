@@ -105,18 +105,6 @@ public class AlbumDetailController {
 		stage_var = mainStage;
 		mainStage.setTitle(album.name);
 		
-		String path = new File(".").getCanonicalPath() + "/stock_folder";
-		File stock_folder = new File(path);
-		File[] files = null;
-		
-		if(stock_folder.isDirectory())
-			files = stock_folder.listFiles();
-		
-		for(File file : files) {
-			String name = file.getName();
-			Boolean b = album.addPhoto(new Photo(path + "/" + name, name));
-		}
-		
 		
 		obsList = FXCollections.observableArrayList(album.getPhotos());
 		thumbnail_view.setItems(obsList);

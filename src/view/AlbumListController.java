@@ -1,10 +1,13 @@
 package view;
 
+import java.io.File;
+import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Optional;
 
 import Backend.Album;
+import Backend.Photo;
 import Backend.User;
 import Backend.UsersApp;
 import javafx.collections.FXCollections;
@@ -93,7 +96,7 @@ public class AlbumListController {
 		
 	}
 	
-	public void makeAlbum() {
+	public void makeAlbum() throws FileNotFoundException, IOException {
 		TextInputDialog dialog = new TextInputDialog("enter name here");
 		 
 		dialog.setTitle("Photos");
@@ -107,11 +110,48 @@ public class AlbumListController {
 				return;
 			
 			Album newAl = new Album(name);
+			String path = path();
+			
+			if(path != "") {
+				
+				File stock_folder = new File(path);
+				File[] files = null;
+				
+				if(stock_folder.isDirectory())
+					files = stock_folder.listFiles();
+				
+				for(File file : files) {
+					String name1 = file.getName();
+					try {
+						Boolean b = newAl.addPhoto(new Photo(path + "/" + name1, name1));
+						
+					} catch (FileNotFoundException e) {
+						
+						errorMessage("Couldn't add photo");
+					}
+				}
+				
+			}
+			
 			user.addAlbum(newAl);
 			
 			updateList();
 		});
 	}
+	
+	private String path() {
+		
+		try {
+			
+			return new File(".").getCanonicalPath() + "/stock_folder";
+			
+		} catch (IOException e) {
+
+			errorMessage("Can't Load Stock Images");
+			return "";
+		}
+	}
+	
 	public void delAlbum() {
 		int index = listview.getSelectionModel().getSelectedIndex();
 		
