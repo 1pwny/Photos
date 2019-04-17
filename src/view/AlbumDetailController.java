@@ -21,11 +21,13 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.ChoiceDialog;
 import javafx.scene.control.ListCell;
 import javafx.scene.control.ListView;
 import javafx.scene.control.TextInputDialog;
+import javafx.scene.control.Alert.AlertType;
 import javafx.stage.FileChooser;
 import javafx.stage.FileChooser.ExtensionFilter;
 import javafx.stage.Modality;
@@ -123,11 +125,32 @@ public class AlbumDetailController {
 		
 		thumbnail_view.getSelectionModel().selectedIndexProperty().addListener((obs, oldVal, newVal) -> selectedPhoto(mainStage));
 		
+		mainStage.setOnCloseRequest(param -> {
+			
+			try {
+				app.writeApp();
+			} 
+			
+			catch (IOException e) {
+				errorMessage("Something went wrong, your changes will not be saved");
+			
+		}});
+		
 		if(obsList.size() > 0)
 			thumbnail_view.getSelectionModel().select(0);
 			
 	}
 	
+	private void errorMessage(String message) {
+		/* To be completed */
+
+		Alert alert = new Alert(AlertType.INFORMATION);
+		alert.initOwner(stage_var);
+		alert.setTitle("Error!");
+		alert.setHeaderText(message);
+		alert.showAndWait();
+	}
+
 	/**
 	 * 
 	 * ImageCell is a type of cell that allows for the listview to display a 50x50 thumbnail image along with
