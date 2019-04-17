@@ -181,6 +181,18 @@ public class Album implements Serializable {
 		return false;
 	}
 	
+	/**
+	 * returns an ArrayList of all photos in this album that fulfill the requirements
+	 */
+	public ArrayList<Photo> sortBy(SearchTerm st) {
+		ArrayList<Photo> sorted = new ArrayList<Photo>();
+		
+		for(Photo p: photos)
+			if(st.allows(p))
+				sorted.add(p);
+		
+		return sorted;
+	}
 	
 	/**
 	 * returns the album name for easy ListView use
@@ -192,6 +204,11 @@ public class Album implements Serializable {
 		return name;
 	}
 	
+	/**
+	 * renames the album
+	 * 
+	 * @param n: the new name
+	 */
 	public void rename(String n) {
 		name = n;
 	}

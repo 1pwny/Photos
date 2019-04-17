@@ -8,25 +8,24 @@ import java.util.Optional;
 
 import Backend.Album;
 import Backend.Photo;
+import Backend.SearchTerm;
 import Backend.User;
 import Backend.UsersApp;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
-import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Alert;
+import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.Button;
 import javafx.scene.control.ListView;
 import javafx.scene.control.TextField;
 import javafx.scene.control.TextInputDialog;
-import javafx.scene.control.Alert.AlertType;
 import javafx.stage.Stage;
-import javafx.stage.WindowEvent;
 
 /**
  * This controller is responsible for showing the list of albums created under this user.
@@ -75,7 +74,6 @@ public class AlbumListController {
 	 * 
 	 * 
 	 * */
-	
 	public void start(Stage primaryStage) {
 		// create list of items
 		// form arraylist
@@ -265,14 +263,41 @@ public class AlbumListController {
 		});
 	}
 	
-	
+	/**
+	 * Will try to search using the given keywords. Will error if the search format is not valid.
+	 */
+	public void search(ActionEvent e) throws IOException {
+		SearchTerm st = new SearchTerm(search_field.getText());
+		if(!st.isvalid())
+			errorMessage("Invalid search query.");
+		
+		ArrayList<Photo> allresults = new ArrayList<Photo>();
+		for(Album a: user.getAlbums()) {
+			for(Photo p: a.sortBy(st))
+				if(!allresults.contains(p))
+					allresults.add(p);
+		}
+		
+		FXMLLoader loader = new FXMLLoader();
+		loader.setLocation(getClass().getResource("SearchView.fxml"));
+		
+		Parent viewParent = loader.load();
+		
+		Scene viewScene = new Scene(viewParent);
+		Stage window = (Stage)((Node)e.getSource()).getScene().getWindow();
+		SearchViewController detail = loader.getController();
+		
+		detail.initData(app, user, allresults);
+		detail.start(window);
+		window.setScene(viewScene);
+		window.show();
+	}
 	
 	/**
 	 * 
 	 * Helper method for simply updating the list after changes
 	 * 
 	 * */
-		
 	public void updateList() {
 		obsList = FXCollections.observableArrayList(user.getAlbums());
 		listview.setItems(obsList);
