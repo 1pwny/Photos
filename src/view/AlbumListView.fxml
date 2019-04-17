@@ -15,8 +15,8 @@
          </children></AnchorPane>
     <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="539.0" prefWidth="259.0">
          <children>
-            <TextField fx:id="search" layoutX="14.0" layoutY="19.0" prefHeight="32.0" prefWidth="230.0" promptText="Search" />
-            <VBox layoutX="24.0" layoutY="86.0" minHeight="-Infinity" minWidth="-Infinity" prefHeight="249.0" prefWidth="210.0" spacing="20.0">
+            <TextField fx:id="search_field" layoutX="14.0" layoutY="19.0" prefHeight="32.0" prefWidth="230.0" promptText="Search" />
+            <VBox layoutX="24.0" layoutY="130.0" minHeight="-Infinity" minWidth="-Infinity" prefHeight="209.0" prefWidth="210.0" spacing="20.0">
                <children>
                   <Button fx:id="create" contentDisplay="CENTER" mnemonicParsing="false" onAction="#makeAlbum" prefHeight="32.0" prefWidth="211.0" text="Create Album" />
                   <Button fx:id="delete" contentDisplay="CENTER" mnemonicParsing="false" onAction="#delAlbum" prefHeight="32.0" prefWidth="211.0" text="Delete Album" />
@@ -25,6 +25,7 @@
                </children>
             </VBox>
             <Button fx:id="logout" layoutX="182.0" layoutY="390.0" mnemonicParsing="false" onAction="#logOut" text="Log Out" textFill="#f20707" />
+            <Button fx:id="search_button" layoutX="14.0" layoutY="62.0" mnemonicParsing="false" text="Search" />
          </children></AnchorPane>
   </items>
 </SplitPane>

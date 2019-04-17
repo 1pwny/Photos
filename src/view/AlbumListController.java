@@ -46,7 +46,8 @@ public class AlbumListController {
 	@FXML Button open;
 	@FXML Button logout;
 	
-	@FXML TextField search;
+	@FXML TextField search_field;
+	@FXML Button search_button;
 	
 	private User user;
 	private ObservableList<Album> obsList;
@@ -133,7 +134,8 @@ public class AlbumListController {
 	 * 
 	 * */
 	
-	public void makeAlbum() throws FileNotFoundException, IOException {
+	public void makeAlbum(ActionEvent e) throws FileNotFoundException, IOException {
+		
 		TextInputDialog dialog = new TextInputDialog("enter name here");
 		 
 		dialog.setTitle("Photos");
@@ -147,27 +149,41 @@ public class AlbumListController {
 				return;
 			
 			Album newAl = new Album(name);
-			String path = path();
+			Button command = (Button) e.getSource();
 			
-			Album stock = app.getUser("Stock").getAlbum("Stock_Images");
-			
-			for(Photo p: stock.getPhotos()) {
+			if(command == create) {
 				
-				String caption = p.getCaption();
+				String path = path();
 				
-				try {
-					Boolean b = newAl.addPhoto(new Photo(path + "/" + caption, caption));
+				Album stock = app.getUser("Stock").getAlbum("Stock_Images");
+				
+				for(Photo p: stock.getPhotos()) {
 					
-				} catch (FileNotFoundException e) {
+					String caption = p.getCaption();
 					
-					//errorMessage("Couldn't add photo");
+					try {
+						Boolean b = newAl.addPhoto(new Photo(path + "/" + caption, caption));
+						
+					} catch (FileNotFoundException er) {
+						
+						//errorMessage("Couldn't add photo");
+					}
+					
 				}
 				
+				user.addAlbum(newAl);
+				
+				updateList();
 			}
 			
-			user.addAlbum(newAl);
-			
-			updateList();
+			else if(command == search_button) {
+				
+				// PUT SEARCH RESULTS HERE
+				ArrayList<Photo> search_list = new ArrayList<Photo>();
+				newAl.getPhotos().addAll(search_list);
+				
+				//CODE FOR LOADING IN SEARCHVIEW CONTROLLER BELOW
+			}
 		});
 	}
 	
