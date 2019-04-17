@@ -112,7 +112,7 @@ public class AlbumDetailController {
 		
 		for(File file : files) {
 			String name = file.getName();
-			Boolean b = album.addPhoto(new Photo("file:stock_folder/" + name, name, 50, 50));
+			Boolean b = album.addPhoto(new Photo(path + "/" + name, name));
 		}
 		
 		
@@ -316,7 +316,7 @@ public class AlbumDetailController {
 	}
 
 	
-	public void uploadPhoto() {
+	public void uploadPhoto() throws FileNotFoundException {
 		
 		FileChooser fileChooser = new FileChooser();
 		fileChooser.setTitle("Add Image");
@@ -327,7 +327,13 @@ public class AlbumDetailController {
 		File selectedFile = fileChooser.showOpenDialog(stage_var);
 		if (selectedFile != null) {
 			
-			Photo photo = new Photo(selectedFile.toURI().toString(), selectedFile.getName(), 50, 50);
+			String path = "";
+			try {
+				path = selectedFile.getCanonicalPath();
+			} catch (IOException e) {
+				e.printStackTrace();
+			}
+			Photo photo = new Photo(path, selectedFile.getName());
 			Boolean b = album.addPhoto(photo);
 			updateAlbum();
 			

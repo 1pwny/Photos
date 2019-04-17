@@ -25,7 +25,6 @@ public class Photo implements Serializable {
 
 	private static final long serialVersionUID = 1L;
 	private String path;
-	private Image image;
 	private String caption;
 	private ArrayList<Tag> tags;
 	private Date date;
@@ -39,7 +38,7 @@ public class Photo implements Serializable {
 	 */
 	public Photo(String p) throws FileNotFoundException {
 		path = p;
-		image = new Image(new FileInputStream(p));
+		//image = new Image(new FileInputStream(p));
 		
 		Calendar c = Calendar.getInstance();
 		c.set(Calendar.MILLISECOND, 0);
@@ -57,7 +56,7 @@ public class Photo implements Serializable {
 	 */
 	public Photo(String p, String cap) throws FileNotFoundException {
 		path = p;
-		image = new Image(new FileInputStream(p));
+		//image = new Image(new FileInputStream(p));
 		Calendar c = Calendar.getInstance();
 		c.set(Calendar.MILLISECOND, 0);
 
@@ -66,6 +65,8 @@ public class Photo implements Serializable {
 		caption = cap;
 	}
 	
+	
+	
 	/**
 	 * Makes a photo and also uses the provided length and width to scale the image
 	 * 
@@ -73,7 +74,7 @@ public class Photo implements Serializable {
 	 * @param l: length
 	 * @param w: width
 	 */
-	public Photo(String p, int l, int w) {
+	/* public Photo(String p, int l, int w) {
 		path = p;
 		image = new Image(p, l, w, false, false);
 		Calendar c = Calendar.getInstance();
@@ -81,7 +82,7 @@ public class Photo implements Serializable {
 
 		date = c.getTime();
 		tags = new ArrayList<Tag>();
-	}
+	} */
 	
 	/**
 	 * Does everything from above, but combines it into a single method
@@ -91,7 +92,7 @@ public class Photo implements Serializable {
 	 * @param l
 	 * @param w
 	 */
-	public Photo(String p, String cap, int l, int w) {
+	/* public Photo(String p, String cap, int l, int w) {
 		path = p;
 		image = new Image(p, l, w, false, false);
 		Calendar c = Calendar.getInstance();
@@ -100,7 +101,7 @@ public class Photo implements Serializable {
 		date = c.getTime();
 		tags = new ArrayList<Tag>();
 		caption = cap;
-	}
+	} */
 	
 	/**
 	 * Will attempt to remove a given Tag from this photo
@@ -175,7 +176,14 @@ public class Photo implements Serializable {
 	}
 	
 	public Image getImage() {
-		return image;
+		try {
+			FileInputStream stream = new FileInputStream(path);
+			return new Image(stream, 50, 50, false, false);
+		} catch (FileNotFoundException e) {
+			// TODO Auto-generated catch block
+			return null;
+		}
+		
 	}
 	
 	public String getCaption() {

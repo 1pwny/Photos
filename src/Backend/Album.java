@@ -191,4 +191,8 @@ public class Album implements Serializable {
 	public String toString() {
 		return name;
 	}
+	
+	public void rename(String n) {
+		name = n;
+	}
 }

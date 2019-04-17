@@ -145,8 +145,9 @@ public class AlbumListController {
 		Optional<String> result = dialog.showAndWait();
 		 
 		result.ifPresent(newname -> {
-		    listview.getItems().get(index).name = newname;
+		    user.getAlbums().get(index).rename(newname);
 		    updateList();
+		    listview.refresh();
 		});
 	}
 	//--------------------
