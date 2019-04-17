@@ -178,7 +178,7 @@ public class AlbumListController {
 			
 			else if(command == search_button) {
 				
-				// PUT SEARCH RESULTS HERE
+				// PUT SEARCH RESULTS IN SEARCH ARRAYLIST
 				ArrayList<Photo> search_list = new ArrayList<Photo>();
 				newAl.getPhotos().addAll(search_list);
 				
