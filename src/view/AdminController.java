@@ -22,13 +22,11 @@ import javafx.scene.text.Text;
 import javafx.stage.Stage; 
 
 /**
- * 
- * @author Anand Raju
- * @author Sammy Berger
- * 
  * This controller is responsible for the actual admin view, and is responsible for adding and 
  * deleting users.
  * 
+ * @author Anand Raju
+ * @author Sammy Berger
  * */
 public class AdminController {
 	

@@ -1,3 +1,9 @@
+/**
+ * This controller shows search results, lets you search more, make an album from them, and go back to the previous view
+ * 
+ * @author Sammy Berger
+ */
+
 package view;
 
 import java.io.IOException;
@@ -90,7 +96,12 @@ public class SearchViewController {
 		alert.showAndWait();
 	}
 	
-	private void goToDetail(ActionEvent e) {
+	/**
+	 * makes an album out of the search results and goes to it
+	 * 
+	 * @param e
+	 */
+	public void makeAlbum(ActionEvent e) {
 		TextInputDialog dialog = new TextInputDialog("enter name here");
 		 
 		dialog.setTitle("Photos");
@@ -134,7 +145,7 @@ public class SearchViewController {
 	/**
 	 * goes back to the Album List View
 	 */
-	private void goBack(ActionEvent e) throws IOException {
+	public void goBack(ActionEvent e) throws IOException {
 		String fxml = "AlbumListView.fxml";
 		
 		FXMLLoader loader = new FXMLLoader();
