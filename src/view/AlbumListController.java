@@ -151,9 +151,9 @@ public class AlbumListController {
 			
 			if(command == create) {
 				
-				/*String path = path();
+				String path = path();
 				
-				Album stock = app.getUser("Stock").getAlbum("Stock_Images");
+				Album stock = app.getUser("stock").getAlbum("stock");
 				
 				for(Photo p: stock.getPhotos()) {
 					
@@ -167,7 +167,7 @@ public class AlbumListController {
 						//errorMessage("Couldn't add photo");
 					}
 					
-				}*/
+				}
 				
 				user.addAlbum(newAl);
 				

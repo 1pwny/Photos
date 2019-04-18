@@ -90,7 +90,7 @@ public class SearchViewController {
 		alert.showAndWait();
 	}
 	
-	private void goToDetail(ActionEvent e) {
+	public void goToDetail(ActionEvent e) {
 		TextInputDialog dialog = new TextInputDialog("enter name here");
 		 
 		dialog.setTitle("Photos");
@@ -134,7 +134,7 @@ public class SearchViewController {
 	/**
 	 * goes back to the Album List View
 	 */
-	private void goBack(ActionEvent e) throws IOException {
+	public void goBack(ActionEvent e) throws IOException {
 		String fxml = "AlbumListView.fxml";
 		
 		FXMLLoader loader = new FXMLLoader();
