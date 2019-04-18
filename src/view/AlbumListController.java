@@ -95,6 +95,9 @@ public class AlbumListController {
 			
 		}});
 		
+		if(obsList.size() > 0)
+			listview.getSelectionModel().select(0);
+		
 	}
 	
 	/**
