@@ -91,10 +91,11 @@ public class SearchTerm {
 	}
 	
 	/**
-	 * checks if a given photo matches this searchterm
 	 * 
-	 * @param p
-	 * @return
+	 * 
+	 * 
+	 * @param p Photo being matched
+	 * @return true if photo matches search term
 	 */
 	public boolean allows(Photo p) {
 		if(!isValid)
