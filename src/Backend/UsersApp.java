@@ -1,3 +1,12 @@
+/**
+ * <h1>UsersApp</h1>
+ * 
+ * Honestly, not actually a very complicated class. This is mostly an easy way to store all out users in a serializable
+ * fashion. The methods really don't necessitate explanation.
+ * 
+ * @author Anand
+ */
+
 package Backend;
 
 import java.io.File;
