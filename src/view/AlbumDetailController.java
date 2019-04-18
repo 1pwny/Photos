@@ -302,12 +302,11 @@ public class AlbumDetailController {
 	
 	/**
 	 * 
-	 * Eventhandler for the slideshow buttons. 
+	 * Eventhandler for slideshow buttons
 	 * 
-	 * @param e If '>>' selects the Photo the "right" (The Image ListView is vertical, so below) 
-	 * and '<<' selects the photo to the "left".
-	 * 
-	 * */
+	 * @param e If 'slide_right' selects the Photo the "right" (The Image ListView is vertical, so below) 
+	 * and 'slide_left' selects the photo to the "left".
+	 */
 	public void next_prev_Photo(ActionEvent e) {
 		if(thumbnail_view.getSelectionModel().getSelectedIndex() < 0)
 			return;

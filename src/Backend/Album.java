@@ -118,12 +118,13 @@ public class Album implements Serializable {
 	public boolean contains(Photo p) {
 		return photos.contains(p);
 	}
+	
 	/**
 	 * same as above, but by photo path instead of photo object
 	 * 
-	 * @param s: a String containing the photo's path
+	 * @param s a String containing the photo's path
 	 * @return whether or not the album has the photo
-	 * @throws FileNotFoundException 
+	 * @throws FileNotFoundException
 	 */
 	public boolean contains(String s) throws FileNotFoundException {
 		return photos.contains(new Photo(s));
@@ -184,7 +185,9 @@ public class Album implements Serializable {
 	}
 	
 	/**
-	 * returns an ArrayList of all photos in this album that fulfill the requirements
+	 * 
+	 * @param st
+	 * @return an ArrayList of all photos in this album that fulfill the requirements
 	 */
 	public ArrayList<Photo> sortBy(SearchTerm st) {
 		ArrayList<Photo> sorted = new ArrayList<Photo>();

@@ -45,10 +45,10 @@ public class TagDialogueController {
 	Stage stage_var;
 	
 	/**
-	 * 
 	 * Method responsible for passing data to the TagDialogue Controller
 	 * 
-	 * */
+	 * @param p Photo being passed as data
+	 */
 	public void initData(Photo p) {
 		photo = p;
 		photo_tags = p.getTags();
@@ -57,10 +57,10 @@ public class TagDialogueController {
 	/**
 	 * 
 	 * Upon starting, the controller sets an observable list of Tags, and adds a listener for each of the 
-	 * selected Tags. 
+	 * selected Tags.
 	 * 
-	 * 
-	 * */
+	 * @param mainStage the stage for starting the controller
+	 */
 	public void start(Stage mainStage) {
 		// create list of items
 		// form arraylist
@@ -90,7 +90,8 @@ public class TagDialogueController {
 	 * 
 	 * The photo is then updated to reflect the changes back in the detailview. 
 	 * 
-	 * */
+	 * @param e ActionEvent that's either 'add', 'edit', or 'delete'
+	 */
 	public void changeTable(ActionEvent e) {
 
 		Button command = (Button)e.getSource();
@@ -270,9 +271,9 @@ public class TagDialogueController {
 		
 	/**
 	 * 
-	 * @retuns text that is stripped of external spaces and whitespace.
-	 * 
-	 * */
+	 * @param s String input
+	 * @return a string with removed external spaces
+	 */
 	public static String removeExternalSpaces(String s) {
 		int starting = 0, ending = 0;
 		

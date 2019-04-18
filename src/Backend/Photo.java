@@ -31,10 +31,11 @@ public class Photo implements Serializable {
 
 	
 	/**
-	 * Will automatically use the path provided to determine the date the photo was edited.
-	 * @throws FileNotFoundException 
 	 * 
-	 * @param p: a String representing the path to the photo
+	 * Will automatically use the path provided to determine the date the photo was edited.
+	 * 
+	 * @param p a String representing the path to the photo
+	 * @throws FileNotFoundException
 	 */
 	public Photo(String p) throws FileNotFoundException {
 		path = p;
@@ -45,11 +46,12 @@ public class Photo implements Serializable {
 	}
 	
 	/**
+	 * 
 	 * Makes a photo and also starts it with a caption
 	 * 
-	 * @param p: a String representing the path to the photo
-	 * @param cap: the photo's caption
-	 * @throws FileNotFoundException 
+	 * @param p a String representing the path to the photo
+	 * @param cap the photo's caption
+	 * @throws FileNotFoundException
 	 */
 	public Photo(String p, String cap) throws FileNotFoundException {
 		path = p;
@@ -108,11 +110,13 @@ public class Photo implements Serializable {
 	public boolean removeTag(Tag t) {
 		return tags.remove(t);
 	}
+	
 	/**
 	 * Will attempt to remove a Tag with the same value as this String.
 	 * 
-	 * @param s: a String to remove
-	 * @return true if a tag with the same value exsts, false if not
+	 * @param name name of Tag
+	 * @param value Value of Tag
+	 * @return true if the tag is removed
 	 */
 	public boolean removeTag(String name, String value) {
 		return tags.remove(new Tag(name, value));

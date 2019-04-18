@@ -44,11 +44,11 @@ public class AdminController {
 	private Stage stage_var;
 	
 	/**
-	 * @param mainstage
+	 * upon starting, the controller sets an observable list containing users from the UserApp, and adds
+	 * listener to each item
 	 * 
-	 * upon starting, the controller sets an observable list containing users from the UserApp, and 
-	 * 
-	 * */
+	 * @param mainStage
+	 */
 	public void start(Stage mainStage) {
 		
 		obsList = FXCollections.observableArrayList(user_list);
