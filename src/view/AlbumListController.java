@@ -151,7 +151,7 @@ public class AlbumListController {
 			
 			if(command == create) {
 				
-				String path = path();
+				/*String path = path();
 				
 				Album stock = app.getUser("Stock").getAlbum("Stock_Images");
 				
@@ -167,7 +167,7 @@ public class AlbumListController {
 						//errorMessage("Couldn't add photo");
 					}
 					
-				}
+				}*/
 				
 				user.addAlbum(newAl);
 				
@@ -180,7 +180,7 @@ public class AlbumListController {
 				ArrayList<Photo> search_list = new ArrayList<Photo>();
 				newAl.getPhotos().addAll(search_list);
 				
-				//CODE FOR LOADING IN SEARCHVIEW CONTROLLER BELOW
+				//CODE FOR LOADING IN SEARCHVIEW CONTROLLER BELO
 			}
 		});
 	}
@@ -271,12 +271,7 @@ public class AlbumListController {
 		if(!st.isvalid())
 			errorMessage("Invalid search query.");
 		
-		ArrayList<Photo> allresults = new ArrayList<Photo>();
-		for(Album a: user.getAlbums()) {
-			for(Photo p: a.sortBy(st))
-				if(!allresults.contains(p))
-					allresults.add(p);
-		}
+		ArrayList<Photo> allresults = user.sortBy(st);
 		
 		if(allresults.size() == 0) {
 			errorMessage("No such photos");

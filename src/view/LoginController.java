@@ -2,13 +2,8 @@ package view;
 
 
 import java.io.File;
-import java.io.FileInputStream;
 import java.io.FileNotFoundException;
-import java.io.FileOutputStream;
 import java.io.IOException;
-import java.io.ObjectInputStream;
-import java.io.ObjectOutputStream;
-import java.io.Serializable;
 import java.util.ArrayList;
 
 import Backend.Album;
@@ -22,9 +17,9 @@ import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Alert;
+import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.Button;
 import javafx.scene.control.TextField;
-import javafx.scene.control.Alert.AlertType;
 import javafx.stage.Stage; 
 
 /**
@@ -89,8 +84,8 @@ public class LoginController<ListController> {
 	 * */
 	private void loadStockUser() {
 		
-		User stock = new User("Stock");
-		Album newAl = new Album("Stock_Images");
+		User stock = new User("stock");
+		Album newAl = new Album("stock");
 		String path = path();
 		
 		if(path != "") {
@@ -104,7 +99,8 @@ public class LoginController<ListController> {
 			for(File file : files) {
 				String name1 = file.getName();
 				try {
-					Boolean b = newAl.addPhoto(new Photo(path + "/" + name1, name1));
+					String s = java.io.File.separator;
+					boolean b = newAl.addPhoto(new Photo("." + s + "stock_folder" + s + name1, name1));
 					
 				} catch (FileNotFoundException e) {
 					

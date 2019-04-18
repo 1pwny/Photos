@@ -203,8 +203,8 @@ public class Album implements Serializable {
 	 */
 	@Override
 	public String toString() {
-		return name + " (" + formatetdDate(earliest, "MM/dd/yyyy") + ", " + formatetdDate(latest, "MM/dd/yyyy") + ")" 
-					+ " Num Photos: " + photos.size();
+		return name + "  (" + photos.size() + " photos)\n"
+				+ "(" + formatetdDate(earliest, "MM/dd/yyyy") + " - " + formatetdDate(latest, "MM/dd/yyyy") + ")";
 	}
 	
 	/**
@@ -225,6 +225,8 @@ public class Album implements Serializable {
 	 * @return a string of the formatted date
 	 */
 	public String formatetdDate(Date d, String s) {
+		if(d == null)
+			return "N/A";
 		
 		DateFormat df = new SimpleDateFormat(s);
 		return df.format(d);

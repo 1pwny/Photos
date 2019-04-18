@@ -90,6 +90,12 @@ public class User implements Serializable {
 		return albums.remove(index);
 	}
 	
+	/**
+	 * attempts to retrieve this User's album with the given name
+	 * 
+	 * @param name
+	 * @return
+	 */
 	public Album getAlbum(String name) {
 		
 		Album get = new Album(name);
@@ -111,6 +117,22 @@ public class User implements Serializable {
 		return albums;
 	}
 
+	/**
+	 * returns a list of all photos in all albums this user has which comply with the given SearchTerm
+	 * 
+	 * @param st
+	 * @return
+	 */
+	public ArrayList<Photo> sortBy(SearchTerm st) {
+		ArrayList<Photo> allresults = new ArrayList<Photo>();
+		for(Album a: albums) {
+			for(Photo p: a.sortBy(st))
+				if(!allresults.contains(p))
+					allresults.add(p);
+		}
+		return allresults;
+	}
+	
 	/**
 	 * return the username for easy viewing in the Admin screen
 	 * 
