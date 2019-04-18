@@ -1,0 +1,16 @@
+The PDF lists all the views and scenes that will be implemented
+
+Anand Raju - Responsible for:
+
+- Login
+- AlbumDetailView
+- AdminView
+
+Sammy Berger - Responsible for:
+
+Responsible for
+
+- AlbumListView
+- SearchView
+
+Other classes such as the ones under Backend are joint responsibility, as they are small enough that either person should be able to add to them freely.

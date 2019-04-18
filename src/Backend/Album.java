@@ -28,15 +28,6 @@ public class Album implements Serializable {
 	public Date earliest, latest;
 	public String name;
 
-	
-	/**
-	 * Creates a new Album
-	 */
-	public Album() {
-		photos = new ArrayList<Photo>();
-		name = "";
-	}
-	
 	/**
 	 * makes an album with a specified name
 	 * 

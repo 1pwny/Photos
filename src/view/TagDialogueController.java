@@ -241,9 +241,7 @@ public class TagDialogueController {
 	 * */
 	private Tag parseTag(Tag t) {
 		
-		Tag tag = new Tag("", "");
-		tag.set_name(retText(t, name_field));
-		tag.set_value(retText(t, value_field));
+		Tag tag = new Tag(retText(t, name_field), retText(t, value_field));
 		
 		return tag;
 		

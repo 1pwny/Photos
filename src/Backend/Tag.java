@@ -33,7 +33,7 @@ public class Tag implements Serializable {
 	
 	
 	/**
-	 * returns the value of the tag
+	 * returns the value of the tag (the second field)
 	 * 
 	 * @return the value of the tag
 	 */
@@ -41,16 +41,11 @@ public class Tag implements Serializable {
 		return value;
 	}
 	
+	/**
+	*	returns the name of the tag (the first field)
+	*/
 	public String name() {
 		return name;
-	}
-	
-	public void set_name(String n) {
-		name = n;
-	}
-	
-	public void set_value(String v) {
-		value = v;
 	}
 	
 	/**
