@@ -132,6 +132,29 @@ public class SearchViewController {
 	}
 	
 	/**
+	 * goes back to the Album List View
+	 */
+	private void goBack(ActionEvent e) throws IOException {
+		String fxml = "AlbumListView.fxml";
+		
+		FXMLLoader loader = new FXMLLoader();
+		loader.setLocation(getClass().getResource(fxml));
+		
+		Parent viewParent = loader.load();
+		
+		
+		Scene viewScene = new Scene(viewParent);
+		AlbumListController listController = loader.getController();
+		
+		
+		listController.initData(app, user);
+		listController.start(stage_var);
+		
+		stage_var.setScene(viewScene);
+		stage_var.show();
+	}
+	
+	/**
 	 * re-searches the users' albums after they press 'enter' in the search textfield
 	 * 
 	 * @param ae
