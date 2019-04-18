@@ -39,11 +39,8 @@ public class Photo implements Serializable {
 	public Photo(String p) throws FileNotFoundException {
 		path = p;
 		//image = new Image(new FileInputStream(p));
-		
-		Calendar c = Calendar.getInstance();
-		c.set(Calendar.MILLISECOND, 0);
 
-		date = c.getTime();
+		date = new Date((new File(p)).lastModified());;
 		tags = new ArrayList<Tag>();
 	}
 	
@@ -57,10 +54,8 @@ public class Photo implements Serializable {
 	public Photo(String p, String cap) throws FileNotFoundException {
 		path = p;
 		//image = new Image(new FileInputStream(p));
-		Calendar c = Calendar.getInstance();
-		c.set(Calendar.MILLISECOND, 0);
 
-		date = c.getTime();
+		date = new Date((new File(p)).lastModified());
 		tags = new ArrayList<Tag>();
 		caption = cap;
 	}
@@ -165,10 +160,7 @@ public class Photo implements Serializable {
 	 * updates the date of this picture
 	 */
 	public void reDate() {
-		Calendar c = Calendar.getInstance();
-		c.set(Calendar.MILLISECOND, 0);
-
-		date = c.getTime();;
+		date = new Date((new File(path)).lastModified());;
 	}
 
 	public String toString() {

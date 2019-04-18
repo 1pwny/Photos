@@ -146,45 +146,17 @@ public class AlbumListController {
 		Optional<String> result = dialog.showAndWait();
 		 
 		result.ifPresent(name -> {
-			if(listview.getItems().contains(name))
+			if(user.getAlbum(name) != null) {
+				errorMessage("That album name already exists!");
 				return;
+			}
 			
 			Album newAl = new Album(name);
-			Button command = (Button) e.getSource();
 			
-			if(command == create) {
+			user.addAlbum(newAl);
 				
-				String path = path();
-				
-				Album stock = app.getUser("stock").getAlbum("stock");
-				
-				for(Photo p: stock.getPhotos()) {
-					
-					String caption = p.getCaption();
-					
-					try {
-						Boolean b = newAl.addPhoto(new Photo(path + "/" + caption, caption));
-						
-					} catch (FileNotFoundException er) {
-						
-						//errorMessage("Couldn't add photo");
-					}
-					
-				}
-				
-				user.addAlbum(newAl);
-				
-				updateList();
-			}
-			
-			else if(command == search_button) {
-				
-				// PUT SEARCH RESULTS IN SEARCH ARRAYLIST
-				ArrayList<Photo> search_list = new ArrayList<Photo>();
-				newAl.getPhotos().addAll(search_list);
-				
-				//CODE FOR LOADING IN SEARCHVIEW CONTROLLER BELO
-			}
+			updateList();
+			listview.refresh();
 		});
 	}
 	
@@ -260,6 +232,11 @@ public class AlbumListController {
 		Optional<String> result = dialog.showAndWait();
 		 
 		result.ifPresent(newname -> {
+			if(user.getAlbum(newname) != null) {
+				errorMessage("That album name already exists!");
+				return;
+			}
+			
 		    user.getAlbums().get(index).rename(newname);
 		    updateList();
 		    listview.refresh();

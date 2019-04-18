@@ -217,8 +217,10 @@ public class AlbumDetailController {
 	 * view that lets the user add, edit, and delete tags. Once the dialogue is closed, the photo is updated.
 	 * 
 	 * */
-	
 	public void gotoTags(ActionEvent e) throws IOException {
+		
+		if(thumbnail_view.getSelectionModel().getSelectedIndex() < 0)
+			return;
 		
 		Photo selected = obsList.get(thumbnail_view.getSelectionModel().getSelectedIndex());
 		
@@ -274,6 +276,11 @@ public class AlbumDetailController {
 	 * */
 	public void editCaption() {
 		
+		if(thumbnail_view.getSelectionModel().getSelectedIndex() < 0)
+			return;
+		
+		Photo selected = obsList.get(thumbnail_view.getSelectionModel().getSelectedIndex());
+		
 		TextInputDialog dialog = new TextInputDialog("Enter Caption here");
 		 
 		dialog.setTitle("Caption");
@@ -284,7 +291,6 @@ public class AlbumDetailController {
 		
 		if(result.isPresent()) {
 			
-			Photo selected = obsList.get(thumbnail_view.getSelectionModel().getSelectedIndex());
 			selected.recaption(result.get());
 			updatePhoto(selected);
 			thumbnail_view.refresh();
@@ -303,6 +309,9 @@ public class AlbumDetailController {
 	 * 
 	 * */
 	public void next_prev_Photo(ActionEvent e) {
+		if(thumbnail_view.getSelectionModel().getSelectedIndex() < 0)
+			return;
+		
 		Button command = (Button) e.getSource();
 		int index = (command == slide_right) ? thumbnail_view.getSelectionModel().getSelectedIndex() + 1 : 
 												thumbnail_view.getSelectionModel().getSelectedIndex() - 1; 
@@ -312,7 +321,7 @@ public class AlbumDetailController {
 	
 	/**
 	 * 
-	 * Essentially refreshes the photo, making sure the controller dispalys the right caption and the right tags. 
+	 * Essentially refreshes the photo, making sure the controller displays the right caption and the right tags. 
 	 * 
 	 * @param p The Photo you want to refresh
 	 * 
@@ -383,6 +392,8 @@ public class AlbumDetailController {
 	 * 
 	 * */
 	public void photo_manuver(ActionEvent e) {
+		if(thumbnail_view.getSelectionModel().getSelectedIndex() < 0)
+			return;
 		
 		Photo selected = obsList.get(thumbnail_view.getSelectionModel().getSelectedIndex());
 		
@@ -417,12 +428,21 @@ public class AlbumDetailController {
 	 * */
 	
 	public void removePhoto() {
+		if(thumbnail_view.getSelectionModel().getSelectedIndex() < 0)
+			return;
 		
 		int index = thumbnail_view.getSelectionModel().getSelectedIndex();
 		Photo selected = obsList.get(index);
 		// obsList.remove(thumbnail_view.getSelectionModel().getSelectedIndex());
 		album.removePhoto(selected);
 		thumbnail_view.getSelectionModel().select(index - 1);
+		
+		if(thumbnail_view.getSelectionModel().getSelectedIndex() < 0) {
+			slideshow_view.setImage(null);
+			caption_text.setText("No image selected");
+			tags_text.setText("");
+			date_text.setText("");
+		}
 		updateAlbum();
 	}
 	
@@ -437,6 +457,9 @@ public class AlbumDetailController {
 	 * 
 	 * */
 	public boolean copyTo(Photo p, Album a, Album b) {
+		if(thumbnail_view.getSelectionModel().getSelectedIndex() < 0)
+			return false;
+		
 		if(!(a.contains(p)) || b.contains(p))
 			return false;
 		
@@ -455,6 +478,7 @@ public class AlbumDetailController {
 	 * 
 	 * */
 	public boolean moveTo(Photo p, Album a, Album b) {
+
 		if(!(a.contains(p)) || b.contains(p))
 			return false;
 		

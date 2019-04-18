@@ -123,18 +123,18 @@ public class SearchViewController {
 			user.addAlbum(newAl);
 
 			try {
-			FXMLLoader loader = new FXMLLoader();
-			loader.setLocation(getClass().getResource("AlbumDetailView.fxml"));
+				FXMLLoader loader = new FXMLLoader();
+				loader.setLocation(getClass().getResource("AlbumDetailView.fxml"));
 
-			Parent viewParent = loader.load();
+				Parent viewParent = loader.load();
 
-			Scene viewScene = new Scene(viewParent);
-			AlbumDetailController detail = loader.getController();
+				Scene viewScene = new Scene(viewParent);
+				AlbumDetailController detail = loader.getController();
 
-			detail.initData(app, user, newAl);
-			detail.start(stage_var);
-			stage_var.setScene(viewScene);
-			stage_var.show();
+				detail.initData(app, user, newAl);
+				detail.start(stage_var);
+				stage_var.setScene(viewScene);
+				stage_var.show();
 			} catch(IOException ie) {
 
 			}
